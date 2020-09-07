@@ -118,7 +118,7 @@ function SingleLegislationCompare(props: {
 export function LegislationVoteCompare(props: {
   politician: Politician.WithInfo;
   userVotes: Record<string, User.Vote>;
-  legislationList: readonly Legislation[];
+  legislationList: readonly Legislation.WithScore[];
 }) {
   return (
     <Fragment>
@@ -189,14 +189,7 @@ export function LegislationVoteCompare(props: {
             votes: P.indexBy(q.votes, vote => vote.politicianId),
           })),
           P.sortBy(legislation => {
-            const politicianVote =
-              legislation.votes[props.politician.id]?.vote ||
-              Legislation.Vote.MISSING;
-            const userVote = props.userVotes[legislation.legislationId] || User.Vote.SKIP;
-            return [
-              politicianVote !== userVote,
-              politicianVote === Legislation.Vote.MISSING,
-            ];
+            return legislation.legislationScore;
           }),
           P.map(legislation => {
             return (

@@ -15,6 +15,9 @@ export interface Legislation {
     }>;
 }
 export namespace Legislation {
+    export interface WithScore extends Legislation {
+        legislationScore: number
+    }
     export const voteSchema = z.object({
         legislationId: z.string(),
         politicianId: z.string(),
@@ -63,7 +66,7 @@ export namespace Legislation {
                     return {
                         background: 'black',
                         color: 'white',
-                        translation: 'Nedalivavo',
+                        translation: 'Nedalyvavo',
                     };
                 default:
                     return {
@@ -118,6 +121,7 @@ export interface Politician {
     politicalPartyNumber: string;
     politicianNumber: string;
     displayName: string;
+    region?: string
     activityData?: {
         profileUrl: string;
         politicianId: string;

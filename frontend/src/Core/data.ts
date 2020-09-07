@@ -17,6 +17,7 @@ export interface PartiesCsvMember {
     politicalPartyNumber: string;
     politicalPartyName: string;
     politicianNumber: string;
+    va: string
 }
 
 
@@ -38,11 +39,11 @@ export function partyInfo(): Record<string, { color: string, logo: string }> {
             color: "#01619E",
             logo: "/images/parties/2.png",
         },
-        "3":  {
+        "3": {
             color: "#FBB903",
             logo: "/images/parties/3.png",
         },
-        "4":  {
+        "4": {
             color: "#F8EC12",
             logo: "/images/parties/4.jpg",
         },
@@ -108,20 +109,23 @@ export async function getPoliticians(legislations: ReadonlyArray<Legislation>): 
         P.indexBy((q) => q.id)
     )
 
-    return partyData.filter((q) => q.politicalPartyNumber !== '').map((q): Politician => {
-        const id = q.displayName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").split(" ").join("_")
-        const activity = x[id]
-        return {
-            id: id,
-            politicalPartyName: q.politicalPartyName,
-            politicalPartyNumber: q.politicalPartyNumber,
-            politicianNumber: q.politicianNumber,
-            displayName: q.displayName.split(" ").map((part) => S(part).capitalize().toString()).join(" "),
-            activityData: activity ? {
-                politicianId: activity.lef.politicianId,
-                fraction: activity.lef.fraction,
-                profileUrl: `https://www.lrs.lt/sip/portal.show?p_r=35299&p_k=1&p_a=498&p_asm_id=${activity.lef.politicianId}`
-            } : undefined,
-        }
-    })
+    return partyData
+        .filter((q) => q.politicalPartyNumber !== '')
+        .map((q): Politician => {
+            const id = q.displayName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").split(" ").join("_")
+            const activity = x[id]
+            return {
+                id: id,
+                politicalPartyName: q.politicalPartyName,
+                politicalPartyNumber: q.politicalPartyNumber,
+                politicianNumber: q.politicianNumber,
+                region: q.va === "" ? undefined : q.va,
+                displayName: q.displayName.split(" ").map((part) => S(part).capitalize().toString()).join(" "),
+                activityData: activity ? {
+                    politicianId: activity.lef.politicianId,
+                    fraction: activity.lef.fraction,
+                    profileUrl: `https://www.lrs.lt/sip/portal.show?p_r=35299&p_k=1&p_a=498&p_asm_id=${activity.lef.politicianId}`
+                } : undefined,
+            }
+        })
 }

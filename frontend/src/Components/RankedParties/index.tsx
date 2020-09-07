@@ -29,19 +29,10 @@ function SingleParty(props: {
                 <div style={{ flexGrow: 1, paddingLeft: 0 }}>
                   <Row gutter={[5, 5]}>
                     <Col>
-                      <Badge
-                        style={{
-                          color: Colors.textColor(info[props.party.partyId]?.color || "#333"),
-                          backgroundColor:
-                            info[props.party.partyId]?.color || "#333",
-                        }}
-                        count={props.party.politicalPartyNumber}
-                      >
-                        <Avatar
-                          size={"large"}
-                          src={info[props.party.partyId]?.logo}
-                        ></Avatar>
-                      </Badge>
+                      <Avatar
+                        size={"large"}
+                        src={info[props.party.partyId]?.logo}
+                      ></Avatar>
                     </Col>
                     <Col className={"CENTER"}>
                       {props.party.politicalPartyName}

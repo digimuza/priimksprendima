@@ -47,6 +47,7 @@ export namespace Score {
     export interface RankedLegislationsPolitciansIds {
         legislationId: string;
         legislationScore: number;
+        userScore: number
         politiciansWithScores:
         | {
             politicianScore: number;
@@ -54,6 +55,15 @@ export namespace Score {
         }[]
         | null;
     }
+
+    export function toPoliticianVote(q: User.Vote): Legislation.Vote {
+        if (q === '@') {
+            return Legislation.Vote.IDLE
+        }
+
+        return q
+    }
+
     export function calculateRawScores(
         politicians: readonly Politician[],
         data: readonly Legislation[],
@@ -62,6 +72,8 @@ export namespace Score {
         return P.pipe(
             data,
             P.map((legislation) => {
+                const userVote = userVotes[legislation.legislationId]
+                const userVote2 =  toPoliticianVote(userVotes[legislation.legislationId])
                 const votingInfo = legislation.votes
                     .map((q) => q.vote)
                     .reduce(
@@ -104,13 +116,12 @@ export namespace Score {
                     Legislation.Vote.IDLE,
                     userVotes[legislation.legislationId] || User.Vote.SKIP
                 ) * legislationScore
-
                 const indexedVotes = P.indexBy(legislation.votes, (vote) => vote.politicianId)
 
                 const politiciansWithScores =
                     userVotes[legislation.legislationId] == null
                         ? null
-                        : politicians.map((q) => {
+                        : politicians.filter((q) => !!q.activityData).map((q) => {
                             const politicianVote = indexedVotes[q.activityData?.politicianId || '']
                             if (politicianVote == null) {
                                 return {
@@ -118,12 +129,13 @@ export namespace Score {
                                     politicianScore: idleScore
                                 }
                             }
+                            const polScore = calculateDecisionScore(
+                                politicianVote.vote,
+                                userVotes[legislation.legislationId]
+                            )
                             return {
                                 politicianId: q.id,
-                                politicianScore: calculateDecisionScore(
-                                    politicianVote.vote,
-                                    userVotes[legislation.legislationId]
-                                ) * legislationScore
+                                politicianScore: polScore * legislationScore
                             }
                         });
 
@@ -132,14 +144,26 @@ export namespace Score {
                     legislationId: legislation.legislationId,
                     legislationScore: legislationScore,
                     politiciansWithScores: politiciansWithScores,
+                    userScore:  calculateDecisionScore(
+                        userVote2,
+                        userVote
+                    ) * legislationScore
                 };
             })
-        );
+        ).filter(P.isDefined);
     }
 
     export function calculateNormalizedPoliticianScore(
         iRawScores: ReadonlyArray<RankedLegislationsPolitciansIds>
-    ): Record<string, number> {
+    ): {
+        p: Record<string, number>,
+        userScore: number
+    } {
+
+        const userScore = iRawScores.reduce((acc, current) => acc + current.userScore, 0)
+        console.log('USER_SCORE',{
+            iRawScores
+        })
         const scores = iRawScores
             .flatMap((q) => q.politiciansWithScores || [])
             .reduce((acc, current) => {
@@ -147,15 +171,19 @@ export namespace Score {
                     acc[current.politicianId] = current.politicianScore;
                     return acc;
                 }
-                acc[current.politicianId] += current.politicianScore;
+                acc[current.politicianId] += current.politicianScore
                 return acc;
             }, {} as Record<string, number>);
 
-        const max = Math.max(...Object.values(scores));
 
-        return Object.entries(scores)
+            console.log('USER_SCORE', {
+                scores
+            })
+
+        return {
+            p: Object.entries(scores)
             .map(([k, v]) => {
-                const score = v / max
+                const score = v / userScore
                 return {
                     [k]: score,
                 };
@@ -165,6 +193,8 @@ export namespace Score {
                     ...acc,
                     ...current,
                 };
-            }, {} as Record<string, number>);
+            }, {} as Record<string, number>),
+            userScore
+        }
     }
 }

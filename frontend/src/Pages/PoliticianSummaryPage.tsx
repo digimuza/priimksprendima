@@ -8,7 +8,7 @@ export function PoliticianSummaryPage(
 ) {
   return (
     <Watch
-      data={Core.DataPoints.userVotesWithLegislation()}
+      data={Core.DataPoints.legislationListWithScores()}
     >
       {({ legislationList, userVotes }) => {
         return (

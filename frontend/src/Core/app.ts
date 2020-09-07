@@ -66,7 +66,7 @@ export namespace Core {
     const log = <T>(_message: string) => RXO.tap<T>((_q) => console.log(_message))
     export const userVotes = () => Store.store.userVotes.pipe(notNull, log('Got userVotes'))
     export const legislationList = () => Store.store.legislationList.pipe(notNull, log('Got legislationList'))
-    export const politiciansList = () => Store.store.politicians.pipe(notNull, log('Got politiciansList'))
+    export const politiciansList = () => Store.store.politicians.pipe(notNull, log('Got politiciansList'), RXO.map((q) => P.pipe(q, P.uniqBy((q) => q.id))))
 
     export const userVotesWithLegislation = () => combineLatest(userVotes(), legislationList(), (w, xc) => (
       {
@@ -74,6 +74,26 @@ export namespace Core {
         legislationList: xc
       }
     )).pipe(log('Got bundle'))
+
+
+    export const legislationListWithScores = () => {
+      return combineLatest(
+        politiciansList(), userVotes(), legislationList(), (politicians, userVotes, legislationList) => ({ politicians,userVotes, legislationList }),
+      ).pipe(
+        RXO.map(({ legislationList, politicians, userVotes }) => {
+          const rawScores = P.indexBy(Score.calculateRawScores(politicians, legislationList, userVotes), (q) => q.legislationId)
+          return {
+            legislationList: legislationList.map((q): Legislation.WithScore => {
+              return {
+                ...q,
+                legislationScore: rawScores[q.legislationId].legislationScore
+              }
+            }),
+            userVotes
+          }
+        })
+      )
+    }
 
     export const politicalPartiesWithPoliticians = () => {
       return combineLatest(
@@ -84,7 +104,7 @@ export namespace Core {
         }) => {
           const parties = Object.entries(
             P.pipe(
-              politicians,
+              politicians.politicianScores,
               // P.filter(q => q.activityData != null),
               P.groupBy(q => q.politicalPartyNumber)
             )
@@ -102,11 +122,11 @@ export namespace Core {
                 politicians: iPolitician,
                 score: P.take(
                   P.sortBy(iPolitician, q => [!q.activityData, -1 * q.score]),
-                  20
+                  10
                 ).reduce((acc, current) => acc + current.score, 0),
               };
             })
-            .filter(P.isDefined);
+            .filter(P.isDefined)
 
           const max = Math.max(...parties.map(q => q.score));
           const withNormalizedScore = parties.map(w => {
@@ -135,12 +155,15 @@ export namespace Core {
         }) => {
           const rawScores = Score.calculateRawScores(politicians, legislationList, userVotes)
           const normalized = Score.calculateNormalizedPoliticianScore(rawScores)
-          return politicians.map((iSinglePolitician): Politician.WithInfo => {
-            return {
-              ...iSinglePolitician,
-              score: normalized[iSinglePolitician.id] || 0,
-            }
-          })
+          return {
+            politicianScores:  politicians.map((iSinglePolitician): Politician.WithInfo => {
+              return {
+                ...iSinglePolitician,
+                score: normalized.p[iSinglePolitician.id] || 0,
+              }
+            }),
+            userScore: normalized.userScore
+          }
         })
       )
     }

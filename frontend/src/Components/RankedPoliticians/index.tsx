@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from "react";
-import { List, Progress, Button, Input, Row, Col, Tag } from "antd";
+import React, { useState, Fragment, useMemo } from "react";
+import { List, Progress, Button, Input, Row, Col, Tag, Select } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import * as P from "ts-prime";
 import { Politician } from "../../Core";
@@ -12,8 +12,6 @@ function SinglePolitician(props: {
   politician: Politician.WithInfo;
   onClick: (politician: Politician.WithInfo) => void;
 }) {
-  
-
   return (
     <List.Item key={props.politician.id}>
       <Row style={{ width: "100%" }}>
@@ -160,74 +158,96 @@ export function RankedPoliticianList(props: {
   onClick: (politic: Politician.WithInfo) => void;
 }) {
   const [searchState, setSearchState] = useState("");
+
+  const regions = useMemo(() => {
+    return P.pipe(
+      props.politicians,
+      P.map((q) => q.region),
+      P.filter(P.isDefined),
+      P.uniq()
+    );
+  }, [props.politicians]);
   return (
-    <List
-      header={
-        <List.Item
-          actions={[
-            <Input
-              placeholder={"Paieška"}
-              onChange={(q) => setSearchState(q.target.value)}
-            ></Input>,
-          ]}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
+    <Fragment>
+      <Row style={{ width: "100%" }}>
+        <Col xs={0}  md={16}>
+        </Col>
+        <Col xs={24} sm={12} md={4}>
+          <Select defaultValue={""} style={{ width: "100%" }}>
+            <Select value={""}>Vienmandatė apygarda</Select>
+            {P.map(regions, (r) => {
+              return <Select.Option value={r}>{r}</Select.Option>;
+            })}
+          </Select>
+        </Col>
+        <Col xs={24} sm={12} md={4}>
+          <Input
+            placeholder={"Paieška"}
+            onChange={(q) => setSearchState(q.target.value)}
+          ></Input>
+        </Col>
+      </Row>
+      <List
+        header={
+          <List.Item>
             <div
               style={{
-                fontSize: 16,
-                minWidth: "50%",
-                flexGrow: 1,
-                maxWidth: "80%",
-                padding: 0,
-                paddingLeft: 0,
-                paddingRight: 10,
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
               }}
             >
-              <strong>Politikai</strong>
+              <div
+                style={{
+                  fontSize: 16,
+                  minWidth: "50%",
+                  flexGrow: 1,
+                  maxWidth: "80%",
+                  padding: 0,
+                  paddingLeft: 0,
+                  paddingRight: 10,
+                }}
+              >
+                <strong>Politikai</strong>
+              </div>
             </div>
-          </div>
-        </List.Item>
-      }
-      pagination={{
-        hideOnSinglePage: true,
-        pageSize: 30,
-      }}
-      dataSource={P.sortBy(props.politicians, (q) => [
-        !q.activityData,
-        -1 * q.score,
-      ]).filter((q) =>
-        searchState === ""
-          ? true
-          : q.displayName
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
-              .toLowerCase()
-              .split(" ")
-              .some((q) =>
-                q.startsWith(
-                  searchState
-                    .toLowerCase()
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "")
+          </List.Item>
+        }
+        pagination={{
+          hideOnSinglePage: true,
+          pageSize: 30,
+        }}
+        dataSource={P.sortBy(
+          props.politicians.filter((q) => !!q.activityData),
+          (q) => [!q.activityData, -1 * q.score]
+        ).filter((q) =>
+          searchState === ""
+            ? true
+            : q.displayName
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase()
+                .split(" ")
+                .some((q) =>
+                  q.startsWith(
+                    searchState
+                      .toLowerCase()
+                      .normalize("NFD")
+                      .replace(/[\u0300-\u036f]/g, "")
+                  )
                 )
-              )
-      )}
-      size={"default"}
-      renderItem={(politician: Politician.WithInfo) => {
-        return (
-          <SinglePolitician
-            key={politician.id}
-            onClick={props.onClick}
-            politician={politician}
-          ></SinglePolitician>
-        );
-      }}
-    ></List>
+        )}
+        size={"default"}
+        renderItem={(politician: Politician.WithInfo) => {
+          return (
+            <SinglePolitician
+              key={politician.id}
+              onClick={props.onClick}
+              politician={politician}
+            ></SinglePolitician>
+          );
+        }}
+      ></List>
+    </Fragment>
   );
 }

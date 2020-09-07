@@ -13,7 +13,7 @@ export function FakeProgress() {
       message: "Traukiami LRS balsavimo rezultatai",
     },
     {
-      message: "Lyginami balsavimo duomenis",
+      message: "Lyginami balsavimo duomenys",
     },
     {
       message: "Vykdomas išmanusis reitingavimas",

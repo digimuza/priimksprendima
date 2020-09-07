@@ -2,7 +2,7 @@ import React from "react";
 import { Core } from "../Core";
 import { RankedPoliticianList, MainLayout, RankedParties } from "../Components";
 import { Watch } from "../Helpers";
-import { Tabs, Button } from "antd";
+import { Tabs } from "antd";
 
 export function RankingPage() {
   return (
@@ -38,7 +38,7 @@ export function RankingPage() {
             </Tabs.TabPane>
             <Tabs.TabPane tab="Politikai" key="2">
               <RankedPoliticianList
-                politicians={politicians}
+                politicians={politicians.politicianScores}
                 onClick={(q) => {
                   Core.Navigator.pushPage({
                     page: "PoliticianSummaryPage",
