@@ -1,0 +1,12 @@
+.ResponsiveYouTube {
+  div {
+    @include media(">phone") {
+      height: 40vh;
+      width: 100%;
+    }
+    @include media("<330px") {
+      height: 150px;
+      width: 100%;
+    }
+  }
+}

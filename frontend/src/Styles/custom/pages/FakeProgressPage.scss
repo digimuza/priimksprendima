@@ -1,0 +1,16 @@
+.FakeProgressPage {
+  .ResponsiveText {
+    @include media(">phone", "<=tablet") {
+      font-size: 5vw !important;
+    }
+    @include media(">tablet", "<=desktop") {
+      font-size: 4vw !important;
+    }
+    @include media(">desktop") {
+      font-size: 35px !important;
+    }
+    @include media("<phone") {
+      font-size: 5vw !important;
+    }
+  }
+}

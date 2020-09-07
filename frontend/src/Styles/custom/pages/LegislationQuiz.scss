@@ -1,0 +1,19 @@
+.LegislationQuiz {
+  .LegislationTitle {
+    @include media("<330px") {
+      font-size: 5vw !important;
+    }
+    @include media("<phone") {
+      font-size: 5vw !important;
+    }
+    @include media(">phone", "<=tablet") {
+      font-size: 5vw !important;
+    }
+    @include media(">tablet", "<=desktop") {
+      font-size: 2vw !important;
+    }
+    @include media(">desktop") {
+      font-size: 24px !important;
+    }
+  }
+}

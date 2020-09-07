@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "noEmitHelpers": true,
+        "skipLibCheck": true,
+        "listEmittedFiles": false,
+        "declaration": true,
+        "declarationMap": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "strictFunctionTypes": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "rootDirs": ["./src"],
+        "module": "commonjs",
+        "target": "es2017",
+        "lib": ["es2017", "esnext.asynciterable"],
+        "typeRoots": ["./node_modules/@types"],
+        "outDir": "./lib"
+    },
+
+    "include": ["./src/**/*"]
+}

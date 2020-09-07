@@ -1,0 +1,38 @@
+.LandingPage {
+  .logo {
+    width: 200px;
+    height: auto;
+  }
+  .navbar-collapse {
+    .navbar-collapse-logo {
+        width: 100px;
+      .logo {
+        width: 60px;
+        height: auto;
+      }
+    }
+    .links-group {
+      padding-top: 35px;
+      .nav-item {
+        width: 100%;
+        // text-align: center;
+        height: 50px;
+      }
+    }
+  }
+
+  .ResponsiveText {
+    @include media(">phone", "<=tablet") {
+      font-size: 9vw;
+      padding: 15px;
+      padding-top: 0;
+      padding-bottom: 35px;
+    }
+    @include media(">tablet", "<=desktop") {
+      font-size: 4vw !important;
+    }
+    @include media(">desktop") {
+      font-size: 35px !important;
+    }
+  }
+}
