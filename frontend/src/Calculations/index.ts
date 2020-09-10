@@ -121,7 +121,7 @@ export namespace Score {
                 const politiciansWithScores =
                     userVotes[legislation.legislationId] == null
                         ? null
-                        : politicians.filter((q) => !!q.activityData).map((q) => {
+                        : politicians.map((q) => {
                             const politicianVote = indexedVotes[q.activityData?.politicianId || '']
                             if (politicianVote == null) {
                                 return {

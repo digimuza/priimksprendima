@@ -5,6 +5,7 @@ import * as P from "ts-prime";
 import { Politician } from "../../Core";
 import { partyInfo } from "../../Core/data";
 import { Colors } from "../../Core/helpers";
+import { AutoComplete } from "antd";
 
 const info = partyInfo();
 
@@ -169,24 +170,6 @@ export function RankedPoliticianList(props: {
   }, [props.politicians]);
   return (
     <Fragment>
-      <Row style={{ width: "100%" }}>
-        <Col xs={0}  md={16}>
-        </Col>
-        <Col xs={24} sm={12} md={4}>
-          <Select defaultValue={""} style={{ width: "100%" }}>
-            <Select value={""}>Vienmandatė apygarda</Select>
-            {P.map(regions, (r) => {
-              return <Select.Option value={r}>{r}</Select.Option>;
-            })}
-          </Select>
-        </Col>
-        <Col xs={24} sm={12} md={4}>
-          <Input
-            placeholder={"Paieška"}
-            onChange={(q) => setSearchState(q.target.value)}
-          ></Input>
-        </Col>
-      </Row>
       <List
         header={
           <List.Item>
@@ -217,10 +200,10 @@ export function RankedPoliticianList(props: {
           hideOnSinglePage: true,
           pageSize: 30,
         }}
-        dataSource={P.sortBy(
-          props.politicians.filter((q) => !!q.activityData),
-          (q) => [!q.activityData, -1 * q.score]
-        ).filter((q) =>
+        dataSource={P.sortBy(props.politicians, (q) => [
+          !q.activityData,
+          -1 * q.score,
+        ]).filter((q) =>
           searchState === ""
             ? true
             : q.displayName
@@ -248,6 +231,96 @@ export function RankedPoliticianList(props: {
           );
         }}
       ></List>
+    </Fragment>
+  );
+}
+
+export function RankedPoliticianListWithSearchAndRegion(props: {
+  politicians: Politician.WithInfo[];
+  onClick: (politic: Politician.WithInfo) => void;
+}) {
+  const [selectedRegion, setSelected] = useState<string | undefined>(undefined);
+  const regions = useMemo(() => {
+    return P.pipe(
+      props.politicians,
+      P.map((q) => q.region),
+      P.filter(P.isDefined),
+      P.uniq(),
+      P.sortBy((q) => q)
+    );
+  }, [props.politicians]);
+
+  function onChange(value: string) {
+    if (value === "-") {
+      setSelected(undefined);
+      return;
+    }
+    setSelected(value);
+  }
+
+  return (
+    <Fragment>
+      <Row style={{ width: "100%" }}>
+        <Col xs={24} sm={24} md={24}>
+          <Select
+            style={{ width: "100%" }}
+            showSearch
+            allowClear
+            onChange={onChange}
+            placeholder="Apygarda"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Select.Option key={"-"} value={"-"}>
+              -
+            </Select.Option>
+            {regions.map((q) => (
+              <Select.Option key={q} value={q}>
+                {q}
+              </Select.Option>
+            ))}
+          </Select>
+        </Col>
+      </Row>
+      <RankedPoliticianList
+        politicians={props.politicians
+          .filter((q) => q.region)
+          .filter((q) => {
+            if (selectedRegion == null) return true;
+
+            return q.region === selectedRegion;
+          })}
+        onClick={props.onClick}
+      ></RankedPoliticianList>
+    </Fragment>
+  );
+}
+
+export function RankedPoliticianListWithSearch(props: {
+  politicians: Politician.WithInfo[];
+  onClick: (politic: Politician.WithInfo) => void;
+}) {
+  const [searchState, setSearchState] = useState("");
+
+  return (
+    <Fragment>
+      <Row style={{ width: "100%" }}>
+        <Col xs={0} md={20}></Col>
+        <Col xs={24} sm={2} md={4}>
+          <Input
+            placeholder={"Paieška"}
+            onChange={(q) => setSearchState(q.target.value)}
+          ></Input>
+        </Col>
+      </Row>
+      <RankedPoliticianList
+        politicians={props.politicians.filter((q) =>
+          q.displayName.toLowerCase().startsWith(searchState)
+        )}
+        onClick={props.onClick}
+      ></RankedPoliticianList>
     </Fragment>
   );
 }

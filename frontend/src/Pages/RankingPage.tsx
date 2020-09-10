@@ -3,6 +3,7 @@ import { Core } from "../Core";
 import { RankedPoliticianList, MainLayout, RankedParties } from "../Components";
 import { Watch } from "../Helpers";
 import { Tabs } from "antd";
+import { RankedPoliticianListWithSearch, RankedPoliticianListWithSearchAndRegion } from "../Components/RankedPoliticians";
 
 export function RankingPage() {
   return (
@@ -37,7 +38,20 @@ export function RankingPage() {
               />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Politikai" key="2">
-              <RankedPoliticianList
+              <RankedPoliticianListWithSearch
+                politicians={politicians.politicianScores}
+                onClick={(q) => {
+                  Core.Navigator.pushPage({
+                    page: "PoliticianSummaryPage",
+                    payload: {
+                      politician: q,
+                    },
+                  });
+                }}
+              />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Viendmandatės apygardos" key="3">
+              <RankedPoliticianListWithSearchAndRegion
                 politicians={politicians.politicianScores}
                 onClick={(q) => {
                   Core.Navigator.pushPage({
