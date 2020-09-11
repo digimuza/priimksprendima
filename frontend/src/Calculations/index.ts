@@ -69,6 +69,7 @@ export namespace Score {
         data: readonly Legislation[],
         userVotes: Record<string, User.Vote>
     ): ReadonlyArray<RankedLegislationsPolitciansIds> {
+
         return P.pipe(
             data,
             P.map((legislation) => {

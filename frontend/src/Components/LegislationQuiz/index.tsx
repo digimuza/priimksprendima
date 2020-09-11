@@ -1,10 +1,18 @@
 import React, { useRef, useState, useEffect, Fragment } from "react";
-import { Card, Typography, Progress, Row, Col } from "antd";
+import {
+  Card,
+  Typography,
+  Progress,
+  Row,
+  Col,
+  List,
+  Button,
+  Space,
+} from "antd";
 import { YouTubeView } from "../Common/Youtube";
 import { BehaviorSubject } from "rxjs";
 import { Legislation, User } from "../../Core";
 import { MainLayout } from "../Layout";
-
 export type UserVote = "FOR" | "AGAINST" | "SKIP";
 export namespace UserVote {
   export const FOR = "FOR";
@@ -33,7 +41,7 @@ function VoteButton(props: {
         borderRadius: "5px",
       }}
       onClick={() => {
-        onClick(props.vote)
+        onClick(props.vote);
         // history.push("/quiz");
       }}
       className={`btn ${voteInfo.class}`}
@@ -73,9 +81,55 @@ function Slide(props: { legislation: Legislation }) {
         ></YouTubeView>
       }
     >
-      <Typography.Title className={"LegislationTitle"}>{legislation.order}</Typography.Title>
+      <Typography.Title className={"LegislationTitle"}>
+        {legislation.order}
+      </Typography.Title>
 
       <Typography.Paragraph>{legislation.fullOrder}</Typography.Paragraph>
+      <a href={legislation.linkToOrder} target={'_blank'}>Nuoroda į įstatymą</a>
+      <br></br>
+      <br></br>
+      <div>
+        <h6>Apibendrinimas</h6>
+        <ul>
+          {props.legislation.summary
+            .split(";")
+            .filter((q) => q)
+            .map((q) => (
+              <li>{q}</li>
+            ))}
+        </ul>
+      </div>
+      <Row gutter={[10, 10]}>
+        <Col md={12}>
+          <div className={"legislation-arguments legislation-arguments-for"}>
+            <h6>Už</h6>
+            <ul>
+              {props.legislation.argumentFor
+                .split(";")
+                .filter((q) => q)
+                .map((q) => (
+                  <li>{q}</li>
+                ))}
+            </ul>
+          </div>
+        </Col>
+        <Col md={12}>
+          <div
+            className={"legislation-arguments legislation-arguments-against"}
+          >
+            <h6>Prieš</h6>
+            <ul>
+              {props.legislation.argumentAgainst
+                .split(";")
+                .filter((q) => q)
+                .map((q) => (
+                  <li>{q}</li>
+                ))}
+            </ul>
+          </div>
+        </Col>
+      </Row>
     </Card>
   );
 }

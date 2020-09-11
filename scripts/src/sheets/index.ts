@@ -87,6 +87,9 @@ export namespace LegislationSheeet {
             order: Z.string(),
             fullOrder: Z.string(),
             linkToOrder: Z.string(),
+            summary: Z.string(),
+            argumentFor: Z.string(),
+            argumentAgainst: Z.string(),
             linkToVotes: Z.string(),
             youtubeUrl: Z.string()
         })
@@ -131,7 +134,7 @@ export namespace LegislationSheeet {
 
     export async function getData() {
         const gClient = google.sheets({ version: 'v4', auth: await getAuth() })
-        const data = await gClient.spreadsheets.get({ spreadsheetId: '1WJSVYUf-Ye1FnI4ivF3HYAKlb3U3P3BLz6zYunBGmUM', ranges: ['prog!A:E'], includeGridData: true });
+        const data = await gClient.spreadsheets.get({ spreadsheetId: '1WJSVYUf-Ye1FnI4ivF3HYAKlb3U3P3BLz6zYunBGmUM', ranges: ['prog!A:K'], includeGridData: true });
         const sheet = data.data.sheets?.find((c) => c.properties?.sheetId === 876507446)
         const grid = sheet?.data?.[0]
         const rows = grid?.rowData?.map((i) => i.values?.map((j) => j.formattedValue)).filter(P.isDefined)
@@ -141,7 +144,8 @@ export namespace LegislationSheeet {
             .slice(1)
             .map((r) => toObject(headers, r))
             .map((q) => {
-                return P.canFail(() => PartialLegislation.schema.parse(q))
+                console.log(q)
+                return P.canFail(() => PartialLegislation.schema.parse(JSON.parse(JSON.stringify(q))))
             })
             .filter(P.isNot(P.isError))
             .map((q) => {
