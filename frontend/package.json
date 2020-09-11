@@ -16,6 +16,7 @@
     "antd": "^4.5.4",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "firebase": "^7.19.1",
     "include-media": "^1.4.9",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

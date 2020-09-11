@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useMemo } from "react";
+import React, { useState, Fragment, useMemo, useEffect } from "react";
 import { List, Progress, Button, Input, Row, Col, Tag, Select } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import * as P from "ts-prime";
@@ -6,6 +6,8 @@ import { Politician } from "../../Core";
 import { partyInfo } from "../../Core/data";
 import { Colors } from "../../Core/helpers";
 import { AutoComplete } from "antd";
+import { BehaviorSubject } from "rxjs";
+import { useObservable } from "../../Helpers/rxjs";
 
 const info = partyInfo();
 
@@ -235,11 +237,12 @@ export function RankedPoliticianList(props: {
   );
 }
 
+const selectedRegionSubject = new BehaviorSubject<string | null>(null)
 export function RankedPoliticianListWithSearchAndRegion(props: {
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
 }) {
-  const [selectedRegion, setSelected] = useState<string | undefined>(undefined);
+  const selectedRegion = useObservable(selectedRegionSubject)
   const regions = useMemo(() => {
     return P.pipe(
       props.politicians,
@@ -252,10 +255,10 @@ export function RankedPoliticianListWithSearchAndRegion(props: {
 
   function onChange(value: string) {
     if (value === "-") {
-      setSelected(undefined);
+      selectedRegionSubject.next(null);
       return;
     }
-    setSelected(value);
+    selectedRegionSubject.next(value);
   }
 
   return (
@@ -268,6 +271,7 @@ export function RankedPoliticianListWithSearchAndRegion(props: {
             allowClear
             onChange={onChange}
             placeholder="Apygarda"
+            value={selectedRegion || undefined}
             optionFilterProp="children"
             filterOption={(input, option) =>
               option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -297,6 +301,7 @@ export function RankedPoliticianListWithSearchAndRegion(props: {
     </Fragment>
   );
 }
+
 
 export function RankedPoliticianListWithSearch(props: {
   politicians: Politician.WithInfo[];

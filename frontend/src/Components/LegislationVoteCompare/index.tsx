@@ -189,7 +189,7 @@ export function LegislationVoteCompare(props: {
             votes: P.indexBy(q.votes, vote => vote.politicianId),
           })),
           P.sortBy(legislation => {
-            return legislation.legislationScore;
+            return -1 * legislation.legislationScore;
           }),
           P.map(legislation => {
             return (
