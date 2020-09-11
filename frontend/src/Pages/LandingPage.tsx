@@ -260,7 +260,7 @@ export default function () {
               <div className="col-12 col-md-6 col-lg-3 grid-margin">
                 <h5 className="pb-2">Prisijunk prie mūsų</h5>
 
-                <a href="https://github.com/digimuza/lrs-api" target="_blank">
+                <a href="https://github.com/digimuza/priimksprendima" target="_blank">
                   <p className="m-0 pb-2">GitHub</p>
                 </a>
               </div>
