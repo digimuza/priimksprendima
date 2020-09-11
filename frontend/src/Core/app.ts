@@ -122,7 +122,7 @@ export namespace Core {
                 politicians: iPolitician,
                 score: P.take(
                   P.sortBy(iPolitician, q => [!q.activityData, -1 * q.score]),
-                  10
+                  141
                 ).reduce((acc, current) => acc + current.score, 0),
               };
             })

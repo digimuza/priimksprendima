@@ -15,21 +15,6 @@ export function RankingPage() {
   const obs = useObservable(selectedTab)
   return (
     <MainLayout title={"Rezultatai"}>
-      <div style={{ position: "absolute", right: 0, top: "5px", zIndex: 400 }}>
-        <button
-          onClick={() => {
-            console.log("Reset");
-            Core.Events.resetQuiz();
-            Core.Navigator.pushPage({
-              page: "LegislationQuizPage",
-              payload: {},
-            });
-          }}
-          className={"btn btn-success btn-sm"}
-        >
-          Kartoti
-        </button>
-      </div>
       <Watch
         data={Core.DataPoints.politicalPartiesWithPoliticians()}
         fallback={<h1>Loading</h1>}

@@ -1,7 +1,7 @@
 import React from "react";
 import { List, Progress, Button, Col, Row, Badge } from "antd";
 import * as P from "ts-prime";
-import { Politician, PoliticalParty } from "../../Core";
+import { Politician, PoliticalParty, Core } from "../../Core";
 import Avatar from "antd/lib/avatar/avatar";
 import { partyInfo } from "../../Core/data";
 import { Colors } from "../../Core/helpers";
@@ -113,6 +113,7 @@ export function RankedParties(props: {
         <List.Item actions={[]}>
           <div
             style={{
+              width: "100%",
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
@@ -129,7 +130,22 @@ export function RankedParties(props: {
                 paddingRight: 10,
               }}
             >
-              <strong>Politikai</strong>
+              <strong>Partijos</strong>
+            </div>
+            <div>
+              <button
+                onClick={() => {
+                  console.log("Reset");
+                  Core.Events.resetQuiz();
+                  Core.Navigator.pushPage({
+                    page: "LegislationQuizPage",
+                    payload: {},
+                  });
+                }}
+                className={"btn btn-success btn-sm"}
+              >
+                Kartoti
+              </button>
             </div>
           </div>
         </List.Item>

@@ -1,18 +1,91 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Watch } from "../Helpers";
 import { Core } from "../Core";
 import { Spin } from "antd";
 import { map } from "rxjs/operators";
-export default function () {
+import { Cookie } from "../Components/Common/Cookies";
+
+export const Footer = () => {
+  return (
+    <Fragment>
+      <section className="contact-details" id="contact-details-section">
+        <div className="row text-center text-md-left">
+          <div className="col-12 col-md-6 col-lg-3 grid-margin">
+            <img
+              width={200}
+              height={"auto"}
+              src="images/PriimkSprendimaLogo.svg"
+              alt=""
+              className="pb-2"
+            />
+            <div className="pt-2">
+              <p className="text-muted m-0">info@priimksprendima.lt</p>
+            </div>
+          </div>
+          <div className="col-12 col-md-6 col-lg-3 grid-margin">
+            <h5 className="pb-2">Prisijunk prie mūsų</h5>
+
+            <a
+              href="https://github.com/digimuza/priimksprendima"
+              target="_blank"
+            >
+              <p className="m-0 pb-2">GitHub</p>
+            </a>
+          </div>
+          <div className="col-12 col-md-6 col-lg-3 grid-margin">
+            <h5 className="pb-2">Naudinga</h5>
+            <a href="/naudojimo-salygos">
+              <p className="m-0 pb-2">Paslaugų teikimo taisyklės</p>
+            </a>
+            <a href="/privatumo-politika">
+              <p className="m-0 pt-1 pb-2">Privatumo politika</p>
+            </a>
+            <a href="/slapuku-politika">
+              <p className="m-0 pt-1 pb-2">Slapukų politika</p>
+            </a>
+          </div>
+          <div className="col-12 col-md-6 col-lg-3 grid-margin">
+            <h5 className="pb-2">Sekite mus</h5>
+
+            <div className="d-flex justify-content-center justify-content-md-start">
+              <a href="#">
+                <span className="mdi mdi-facebook" />
+              </a>
+              <a href="#">
+                <span className="mdi mdi-twitter" />
+              </a>
+              <a href="#">
+                <span className="mdi mdi-instagram" />
+              </a>
+              <a href="#">
+                <span className="mdi mdi-linkedin" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer className="border-top"></footer>
+    </Fragment>
+  );
+};
+
+export function Header() {
   const history = useHistory();
   return (
-    <div className={"LandingPage"}>
+    <Fragment>
+      <Cookie></Cookie>
       <header>
         <nav className="navbar navbar-expand-lg pl-3 pl-sm-0">
           <div className="container">
             <div className="navbar-brand-wrapper d-flex w-100">
-              <img className={"logo"} src="images/PriimkSprendimaLogo.svg" alt="" />
+              <a href="/">
+                <img
+                  className={"logo"}
+                  src="images/PriimkSprendimaLogo.svg"
+                  alt=""
+                />
+              </a>
               <button
                 className="navbar-toggler ml-auto"
                 type="button"
@@ -32,7 +105,9 @@ export default function () {
               <ul className="navbar-nav align-items-lg-center align-items-start ml-auto">
                 <li className="d-flex align-items-center justify-content-between pl-4 pl-lg-0">
                   <div className="navbar-collapse-logo">
-                    <img className={"logo"} src="images/FavIco.svg" alt="" />
+                    <a href="/">
+                      <img className={"logo"} src="images/FavIco.svg" alt="" />
+                    </a>
                   </div>
                   <button
                     className="navbar-toggler close-button"
@@ -74,6 +149,15 @@ export default function () {
           </div>
         </nav>
       </header>
+    </Fragment>
+  );
+}
+
+export default function () {
+  const history = useHistory();
+  return (
+    <div className={"LandingPage"}>
+      <Header></Header>
       <div className="banner">
         <div className="container">
           <h1 className="font-weight-semibold ResponsiveText">
@@ -243,60 +327,7 @@ export default function () {
               </div>
             </div>
           </section>
-          <section className="contact-details" id="contact-details-section">
-            <div className="row text-center text-md-left">
-              <div className="col-12 col-md-6 col-lg-3 grid-margin">
-                <img
-                  width={200}
-                  height={"auto"}
-                  src="images/PriimkSprendimaLogo.svg"
-                  alt=""
-                  className="pb-2"
-                />
-                <div className="pt-2">
-                  <p className="text-muted m-0">info@priimksprendima.lt</p>
-                </div>
-              </div>
-              <div className="col-12 col-md-6 col-lg-3 grid-margin">
-                <h5 className="pb-2">Prisijunk prie mūsų</h5>
-
-                <a href="https://github.com/digimuza/priimksprendima" target="_blank">
-                  <p className="m-0 pb-2">GitHub</p>
-                </a>
-              </div>
-              <div className="col-12 col-md-6 col-lg-3 grid-margin">
-                <h5 className="pb-2">Naudinga</h5>
-                <a href="#">
-                  <p className="m-0 pb-2">Paslaugų teikimo taisyklės</p>
-                </a>
-                <a href="#">
-                  <p className="m-0 pt-1 pb-2">Privatumo politika</p>
-                </a>
-                <a href="#">
-                  <p className="m-0 pt-1 pb-2">Slapukų politika</p>
-                </a>
-              </div>
-              <div className="col-12 col-md-6 col-lg-3 grid-margin">
-                <h5 className="pb-2">Sekite mus</h5>
-
-                <div className="d-flex justify-content-center justify-content-md-start">
-                  <a href="#">
-                    <span className="mdi mdi-facebook" />
-                  </a>
-                  <a href="#">
-                    <span className="mdi mdi-twitter" />
-                  </a>
-                  <a href="#">
-                    <span className="mdi mdi-instagram" />
-                  </a>
-                  <a href="#">
-                    <span className="mdi mdi-linkedin" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
-          <footer className="border-top"></footer>
+          <Footer></Footer>
           {/* Modal for Contact - us Button */}
           <div
             className="modal fade"

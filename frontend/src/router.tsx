@@ -6,6 +6,8 @@ import { PoliticianSummaryPage } from "./Pages/PoliticianSummaryPage";
 import { RankingPage, RankedPoliticians } from "./Pages/RankingPage";
 import { FakeProgress } from "./Pages/FakeProgressPage";
 import { LoadingPage } from "./Pages/LoadingPage";
+import { Footer } from "./Pages/LandingPage";
+import { Page } from "./Components/Common/Page";
 
 export function RouterPage() {
   return (

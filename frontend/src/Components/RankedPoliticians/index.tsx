@@ -2,7 +2,7 @@ import React, { useState, Fragment, useMemo, useEffect } from "react";
 import { List, Progress, Button, Input, Row, Col, Tag, Select } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import * as P from "ts-prime";
-import { Politician } from "../../Core";
+import { Politician, Core } from "../../Core";
 import { partyInfo } from "../../Core/data";
 import { Colors } from "../../Core/helpers";
 import { AutoComplete } from "antd";
@@ -77,6 +77,7 @@ function SinglePolitician(props: {
                   )}
                 </div>
               </div>
+              <div style={{ height: 10 }}></div>
               {props.politician.activityData ? (
                 <Progress
                   key={props.politician.id}
@@ -104,6 +105,7 @@ function SinglePolitician(props: {
                   ></Progress>
                 </div>
               )}
+              <div style={{ height: 10 }}></div>
               <Row gutter={[5, 5]}>
                 <Col>
                   <Avatar
@@ -177,6 +179,7 @@ export function RankedPoliticianList(props: {
           <List.Item>
             <div
               style={{
+                width: "100%",
                 display: "flex",
                 justifyContent: "flex-start",
                 alignItems: "center",
@@ -194,6 +197,21 @@ export function RankedPoliticianList(props: {
                 }}
               >
                 <strong>Politikai</strong>
+              </div>
+
+              <div>
+                <button
+                  onClick={() => {
+                    Core.Events.resetQuiz();
+                    Core.Navigator.pushPage({
+                      page: "LegislationQuizPage",
+                      payload: {},
+                    });
+                  }}
+                  className={"btn btn-success btn-sm"}
+                >
+                  Kartoti
+                </button>
               </div>
             </div>
           </List.Item>
@@ -237,12 +255,12 @@ export function RankedPoliticianList(props: {
   );
 }
 
-const selectedRegionSubject = new BehaviorSubject<string | null>(null)
+const selectedRegionSubject = new BehaviorSubject<string | null>(null);
 export function RankedPoliticianListWithSearchAndRegion(props: {
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
 }) {
-  const selectedRegion = useObservable(selectedRegionSubject)
+  const selectedRegion = useObservable(selectedRegionSubject);
   const regions = useMemo(() => {
     return P.pipe(
       props.politicians,
@@ -301,7 +319,6 @@ export function RankedPoliticianListWithSearchAndRegion(props: {
     </Fragment>
   );
 }
-
 
 export function RankedPoliticianListWithSearch(props: {
   politicians: Politician.WithInfo[];
