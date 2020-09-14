@@ -3,14 +3,17 @@ import { List, Progress, Button, Col, Row, Badge } from "antd";
 import * as P from "ts-prime";
 import { Politician, PoliticalParty, Core } from "../../Core";
 import Avatar from "antd/lib/avatar/avatar";
-import { partyInfo } from "../../Core/data";
-import { Colors } from "../../Core/helpers";
+import { useObservable } from "../../Helpers/rxjs";
+import { imageFolder } from "../../Helpers";
 
-const info = partyInfo();
+
+
 function SingleParty(props: {
   party: PoliticalParty.WithInfo;
   onClick: (party: PoliticalParty.WithInfo) => void;
 }) {
+  const info = useObservable(Core.Store.store.colorData);
+
   return (
     <List.Item>
       <Row style={{ width: "100%" }}>
@@ -29,9 +32,12 @@ function SingleParty(props: {
                 <div style={{ flexGrow: 1, paddingLeft: 0 }}>
                   <Row gutter={[5, 5]}>
                     <Col>
+                      {}
                       <Avatar
                         size={"large"}
-                        src={info[props.party.partyId]?.logo}
+                        src={imageFolder(
+                          `parties/${info?.[props.party.partyId]?.logo}`
+                        )}
                       ></Avatar>
                     </Col>
                     <Col className={"CENTER"}>

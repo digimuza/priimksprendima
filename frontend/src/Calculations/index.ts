@@ -172,7 +172,7 @@ export namespace Score {
                     acc[current.politicianId] = current.politicianScore;
                     return acc;
                 }
-                acc[current.politicianId] += current.politicianScore
+                acc[current.politicianId] *= current.politicianScore
                 return acc;
             }, {} as Record<string, number>);
 

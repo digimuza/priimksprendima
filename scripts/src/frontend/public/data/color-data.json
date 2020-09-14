@@ -1,0 +1,58 @@
+{
+  "4": {
+    "logo": "4.jpg",
+    "color": "rgb(196,4,4)"
+  },
+  "5": {
+    "logo": "5.jpg",
+    "color": "rgb(212,244,100)"
+  },
+  "10": {
+    "logo": "10.jpg",
+    "color": "rgb(44,52,8)"
+  },
+  "11": {
+    "logo": "11.jpg",
+    "color": "rgb(108,12,28)"
+  },
+  "13": {
+    "logo": "13.png",
+    "color": "rgb(156,4,4)"
+  },
+  "antikorupcine_n_puteikio_k_krivicko_koalicija": {
+    "logo": "antikorupcine_n_puteikio_k_krivicko_koalicija.jpg",
+    "color": "rgb(164,164,164)"
+  },
+  "darbo_partija": {
+    "logo": "darbo_partija.png",
+    "color": "rgb(4,4,52)"
+  },
+  "drasos_kelias": {
+    "logo": "drasos_kelias.jpg",
+    "color": "rgb(76,36,108)"
+  },
+  "laisves_partija": {
+    "logo": "laisves_partija.png",
+    "color": "rgb(252,252,252)"
+  },
+  "lietuvos_respublikos_liberalu_sajudis": {
+    "logo": "lietuvos_respublikos_liberalu_sajudis.png",
+    "color": "rgb(212,212,212)"
+  },
+  "lietuvos_socialdemokartu_partija": {
+    "logo": "lietuvos_socialdemokartu_partija.jpg",
+    "color": "rgb(244,252,252)"
+  },
+  "lietuvos_valstieciu_ir_zaliuju_sajunga": {
+    "logo": "lietuvos_valstieciu_ir_zaliuju_sajunga.png",
+    "color": "rgb(4,164,84)"
+  },
+  "lietuvos_zaliuju_partija": {
+    "logo": "lietuvos_zaliuju_partija.jpg",
+    "color": "rgb(220,236,202)"
+  },
+  "tevynes_sajunga-lietuvos_krikcionys_demokratai": {
+    "logo": "tevynes_sajunga-lietuvos_krikcionys_demokratai.png",
+    "color": "rgb(180,180,180)"
+  }
+}

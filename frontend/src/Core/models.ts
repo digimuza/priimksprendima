@@ -125,6 +125,7 @@ export interface Politician {
     id: string;
     politicalPartyName: string;
     politicalPartyNumber: string;
+    politicalPartyId: string;
     politicianNumber: string;
     displayName: string;
     region?: string

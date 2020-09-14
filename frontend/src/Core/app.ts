@@ -3,8 +3,9 @@ import { Legislation, Politician, User, PoliticalParty } from './models';
 import * as RXO from 'rxjs/operators';
 import * as P from 'ts-prime'
 import { Score } from '../Calculations';
-import { getLegislations, getPoliticians } from './data';
+import { getLegislations, getPoliticians, partyInfo } from './data';
 import { LocalStorage } from './localStorage';
+import { toId } from '../Helpers';
 
 const quizLocalStorage = new LocalStorage<Record<string, User.Vote>>('priimk_sprendima_quiz')
 export namespace Core {
@@ -55,6 +56,7 @@ export namespace Core {
   export namespace Store {
     export const store = {
       ready: new BehaviorSubject<boolean>(false),
+      colorData: new BehaviorSubject<Record<string, { logo: string, color: string }> | null>(null),
       politicians: new BehaviorSubject<ReadonlyArray<Politician> | null>(null),
       legislationList: new BehaviorSubject<ReadonlyArray<Legislation> | null>(null),
       userVotes: new BehaviorSubject<Record<string, User.Vote> | null>(null)
@@ -78,7 +80,7 @@ export namespace Core {
 
     export const legislationListWithScores = () => {
       return combineLatest(
-        politiciansList(), userVotes(), legislationList(), (politicians, userVotes, legislationList) => ({ politicians,userVotes, legislationList }),
+        politiciansList(), userVotes(), legislationList(), (politicians, userVotes, legislationList) => ({ politicians, userVotes, legislationList }),
       ).pipe(
         RXO.map(({ legislationList, politicians, userVotes }) => {
           const rawScores = P.indexBy(Score.calculateRawScores(politicians, legislationList, userVotes), (q) => q.legislationId)
@@ -115,7 +117,7 @@ export namespace Core {
               }
               const f = iPolitician[0];
               return {
-                partyId: partyId,
+                partyId: toId(f.politicalPartyName),
                 politicalPartyName: f.politicalPartyName,
                 politicalPartyNumber: f.politicalPartyNumber,
                 size: iPolitician.length,
@@ -156,7 +158,7 @@ export namespace Core {
           const rawScores = Score.calculateRawScores(politicians, legislationList, userVotes)
           const normalized = Score.calculateNormalizedPoliticianScore(rawScores)
           return {
-            politicianScores:  politicians.map((iSinglePolitician): Politician.WithInfo => {
+            politicianScores: politicians.map((iSinglePolitician): Politician.WithInfo => {
               return {
                 ...iSinglePolitician,
                 score: normalized.p[iSinglePolitician.id] || 0,
@@ -213,6 +215,9 @@ export namespace Core {
     const legislationUrl = new URL(url.origin)
     legislationUrl.pathname = "/data/legislation-data.json"
 
+    partyInfo().then((q)=>{
+      Store.store.colorData.next(q)
+    })
 
     getLegislations().then((legislations) => {
       Store.store.legislationList.next(legislations)

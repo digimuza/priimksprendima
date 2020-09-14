@@ -8,13 +8,13 @@ import { Colors } from "../../Core/helpers";
 import { AutoComplete } from "antd";
 import { BehaviorSubject } from "rxjs";
 import { useObservable } from "../../Helpers/rxjs";
-
-const info = partyInfo();
+import { imageFolder } from "../../Helpers";
 
 function SinglePolitician(props: {
   politician: Politician.WithInfo;
   onClick: (politician: Politician.WithInfo) => void;
 }) {
+  const info = useObservable(Core.Store.store.colorData);
   return (
     <List.Item key={props.politician.id}>
       <Row style={{ width: "100%" }}>
@@ -38,11 +38,11 @@ function SinglePolitician(props: {
                       <Avatar
                         style={{
                           color: Colors.textColor(
-                            info[props.politician.politicalPartyNumber].color ||
+                            info?.[props.politician.politicalPartyId]?.color ||
                               "#000"
                           ),
                           background:
-                            info[props.politician.politicalPartyNumber].color,
+                            info?.[props.politician.politicalPartyId]?.color,
                         }}
                         src={`https://www.lrs.lt/SIPIS/sn_foto/2016/${props.politician.id}.jpg`}
                       >
@@ -53,11 +53,11 @@ function SinglePolitician(props: {
                     <Avatar
                       style={{
                         color: Colors.textColor(
-                          info[props.politician.politicalPartyNumber].color ||
+                          info?.[props.politician.politicalPartyId]?.color ||
                             "#000"
                         ),
                         background:
-                          info[props.politician.politicalPartyNumber].color,
+                          info?.[props.politician.politicalPartyId]?.color,
                       }}
                     >
                       {props.politician.displayName.slice(0, 1)}
@@ -110,7 +110,11 @@ function SinglePolitician(props: {
                 <Col>
                   <Avatar
                     size={"small"}
-                    src={info[props.politician.politicalPartyNumber].logo}
+                    src={imageFolder(
+                      `parties/${
+                        info?.[props.politician.politicalPartyId]?.logo
+                      }`
+                    )}
                   ></Avatar>
                 </Col>
                 <Col>{props.politician.politicalPartyName}</Col>
@@ -162,16 +166,6 @@ export function RankedPoliticianList(props: {
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
 }) {
-  const [searchState, setSearchState] = useState("");
-
-  const regions = useMemo(() => {
-    return P.pipe(
-      props.politicians,
-      P.map((q) => q.region),
-      P.filter(P.isDefined),
-      P.uniq()
-    );
-  }, [props.politicians]);
   return (
     <Fragment>
       <List
@@ -223,23 +217,7 @@ export function RankedPoliticianList(props: {
         dataSource={P.sortBy(props.politicians, (q) => [
           !q.activityData,
           -1 * q.score,
-        ]).filter((q) =>
-          searchState === ""
-            ? true
-            : q.displayName
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .toLowerCase()
-                .split(" ")
-                .some((q) =>
-                  q.startsWith(
-                    searchState
-                      .toLowerCase()
-                      .normalize("NFD")
-                      .replace(/[\u0300-\u036f]/g, "")
-                  )
-                )
-        )}
+        ])}
         size={"default"}
         renderItem={(politician: Politician.WithInfo) => {
           return (
