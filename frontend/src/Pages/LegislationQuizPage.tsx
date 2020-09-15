@@ -11,7 +11,7 @@ import { Spin } from "antd";
 export function LegislationQuizPage() {
   return (
     <Watch
-      data={Core.DataPoints.legislationList()}
+      data={Core.DataPoints.legislationList}
       fallback={
         <FullScreenNoToolbar title={"Loading"}>
           <div className={"CENTER STRETCH"}>

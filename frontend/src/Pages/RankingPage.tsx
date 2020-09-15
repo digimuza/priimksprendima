@@ -16,7 +16,7 @@ export function RankingPage() {
   return (
     <MainLayout title={"Rezultatai"}>
       <Watch
-        data={Core.DataPoints.politicalPartiesWithPoliticians()}
+        data={Core.DataPoints.politicalPartiesWithPoliticians}
         fallback={<h1>Loading</h1>}
       >
         {({ parties, politicians }) => (
