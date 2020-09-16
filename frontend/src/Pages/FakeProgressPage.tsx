@@ -35,7 +35,6 @@ export function FakeProgress() {
           }),
           RXO.filter(P.isDefined),
           RXO.finalize(() => {
-            console.log("asdkj");
             Core.Navigator.pushPage({
               page: "RankingPage",
               payload: {},

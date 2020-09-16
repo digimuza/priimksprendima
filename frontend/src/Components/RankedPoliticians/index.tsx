@@ -162,10 +162,12 @@ function SinglePolitician(props: {
   );
 }
 
+const selectedPagination = new BehaviorSubject<number | null>(null)
 export function RankedPoliticianList(props: {
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
 }) {
+  const iSelectedPagination = useObservable(selectedPagination)
   return (
     <Fragment>
       <List
@@ -211,13 +213,14 @@ export function RankedPoliticianList(props: {
           </List.Item>
         }
         pagination={{
+          current: iSelectedPagination ?? 0,
+          onChange: (page) => {
+            selectedPagination.next(page)
+          },
           hideOnSinglePage: true,
-          pageSize: 30,
+          pageSize: 10,
         }}
-        dataSource={P.sortBy(props.politicians, (q) => [
-          !q.activityData,
-          -1 * q.score,
-        ])}
+        dataSource={P.sortBy(props.politicians, (q) => [-1 * q.score])}
         size={"default"}
         renderItem={(politician: Politician.WithInfo) => {
           return (
@@ -229,6 +232,7 @@ export function RankedPoliticianList(props: {
           );
         }}
       ></List>
+      <div style={{ height: 100 }}></div>
     </Fragment>
   );
 }

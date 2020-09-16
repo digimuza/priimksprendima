@@ -1,3 +1,4 @@
+
 import { Legislation, User, Politician } from '../Core';
 import * as P from 'ts-prime';
 import * as z from 'zod'
@@ -36,8 +37,8 @@ export namespace Score {
         iPoliticianVote: Legislation.Vote,
         iUserVote: User.Vote
     ): number {
-        const weightsFor = [8, 2, 3.5, 2.5];
-        const weightsAgainst = [2, 8, 3.5, 3.0];
+        const weightsFor = [10, -10, -4, -5];
+        const weightsAgainst = [-10, 10, -4, -3];
 
         return z.number().parse(iUserVote === User.Vote.FOR
             ? weightsFor[voteToInt(iPoliticianVote)]
@@ -48,6 +49,7 @@ export namespace Score {
         legislationId: string;
         legislationScore: number;
         userScore: number
+        userVote: User.Vote
         politiciansWithScores:
         | {
             politicianScore: number;
@@ -123,17 +125,25 @@ export namespace Score {
                     userVotes[legislation.legislationId] == null
                         ? null
                         : politicians.map((q) => {
+
+                            // Politikas nebuvo kadnecijoje duok jam idleScore
                             const politicianVote = indexedVotes[q.activityData?.politicianId || '']
                             if (politicianVote == null) {
                                 return {
                                     politicianId: q.id,
-                                    politicianScore: idleScore
+                                    politicianScore: 0
                                 }
                             }
                             const polScore = calculateDecisionScore(
                                 politicianVote.vote,
                                 userVotes[legislation.legislationId]
                             )
+                                if (polScore == null) {
+                                    debugger
+                                }
+                                if (legislationScore == null) {
+                                    debugger
+                                }
                             return {
                                 politicianId: q.id,
                                 politicianScore: polScore * legislationScore
@@ -145,6 +155,7 @@ export namespace Score {
                     legislationId: legislation.legislationId,
                     legislationScore: legislationScore,
                     politiciansWithScores: politiciansWithScores,
+                    userVote,
                     userScore:  calculateDecisionScore(
                         userVote2,
                         userVote
@@ -161,32 +172,43 @@ export namespace Score {
         userScore: number
     } {
 
-        const userScore = iRawScores.reduce((acc, current) => acc + current.userScore, 0)
+        const withoutSkipScores = iRawScores.filter((q)=> q.userVote !== User.Vote.SKIP)
+
+        
+        const userAverage = withoutSkipScores.reduce((acc, current) => acc + current.userScore, 0) / withoutSkipScores.length
+        const userScore = userAverage * Math.pow(withoutSkipScores.length, 0.5)
         console.log('USER_SCORE',{
-            iRawScores
+            scores: withoutSkipScores.map((q)=>q.userScore).reduce((acc, c)=>acc + c, 0) / withoutSkipScores.length,
+            userScore
         })
-        const scores = iRawScores
-            .flatMap((q) => q.politiciansWithScores || [])
-            .reduce((acc, current) => {
-                if (acc[current.politicianId] == null) {
-                    acc[current.politicianId] = current.politicianScore;
-                    return acc;
+        const scores = P.pipe(
+            withoutSkipScores,
+            P.flatMap((q)=> q.politiciansWithScores),
+            P.filter(P.isDefined),
+            P.groupBy((q)=> q.politicianId),
+            (q) => Object.values(q),
+            P.map((politicians)=>{
+                const avarage = politicians.reduce((acc, current)=> acc + current.politicianScore,0) / politicians.length
+                return {
+                    politcianScore: avarage * Math.pow( politicians.length, 0.5),
+                    politicianId: politicians[0].politicianId
                 }
-                acc[current.politicianId] += current.politicianScore
-                return acc;
-            }, {} as Record<string, number>);
-
-
-            console.log('USER_SCORE', {
+            })
+        )
+            console.log('Poli', {
                 scores
             })
-
-        return {
-            p: Object.entries(scores)
-            .map(([k, v]) => {
-                const score = v / userScore
+            console.log({
+                original: scores
+            })
+            const finalNormalizedScores = scores
+            .map(({politcianScore,politicianId}) => {
+                if (userScore == null) {
+                    debugger
+                }
+                const score = politcianScore / userScore
                 return {
-                    [k]: score ,
+                    [politicianId]: (score + 1) / 2,
                 };
             })
             .reduce((acc, current) => {
@@ -194,7 +216,12 @@ export namespace Score {
                     ...acc,
                     ...current,
                 };
-            }, {} as Record<string, number>),
+            }, {} as Record<string, number>)
+            console.log("finalNormalizedScores",
+            finalNormalizedScores
+            )
+        return {
+            p: finalNormalizedScores,
             userScore
         }
     }
