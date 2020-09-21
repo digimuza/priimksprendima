@@ -162,7 +162,7 @@ function SinglePolitician(props: {
   );
 }
 
-const selectedPagination = new BehaviorSubject<number | null>(null)
+export const selectedPagination = new BehaviorSubject<number | null>(null)
 export function RankedPoliticianList(props: {
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
@@ -213,7 +213,7 @@ export function RankedPoliticianList(props: {
           </List.Item>
         }
         pagination={{
-          current: iSelectedPagination ?? 0,
+          current: iSelectedPagination ?? 1,
           onChange: (page) => {
             selectedPagination.next(page)
           },
@@ -254,6 +254,7 @@ export function RankedPoliticianListWithSearchAndRegion(props: {
   }, [props.politicians]);
 
   function onChange(value: string) {
+    selectedPagination.next(1)
     if (value === "-") {
       selectedRegionSubject.next(null);
       return;

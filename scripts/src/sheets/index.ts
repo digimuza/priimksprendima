@@ -87,9 +87,9 @@ export namespace LegislationSheeet {
             order: Z.string(),
             fullOrder: Z.string(),
             linkToOrder: Z.string(),
-            summary: Z.string(),
-            argumentFor: Z.string(),
-            argumentAgainst: Z.string(),
+            summary: Z.string().optional(),
+            argumentFor: Z.string().optional(),
+            argumentAgainst: Z.string().optional(),
             linkToVotes: Z.string(),
             youtubeUrl: Z.string()
         })
@@ -173,6 +173,7 @@ export namespace LegislationSheeet {
 
 LegislationSheeet.getData().then(
     (q) => {
+        console.log(`got ${q.length}`)
         Jet.writeAsync(fromRoot("./raw.json"), q)
     }
 )

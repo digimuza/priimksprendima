@@ -20,7 +20,7 @@ export const Footer = () => {
               className="pb-2"
             />
             <div className="pt-2">
-              <p className="text-muted m-0">info@priimksprendima.lt</p>
+              <p className="text-muted m-0">priimksprendima@gmail.com</p>
             </div>
           </div>
           <div className="col-12 col-md-6 col-lg-3 grid-margin">

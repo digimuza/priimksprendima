@@ -5,6 +5,7 @@ import { Politician, PoliticalParty, Core } from "../../Core";
 import Avatar from "antd/lib/avatar/avatar";
 import { useObservable } from "../../Helpers/rxjs";
 import { imageFolder } from "../../Helpers";
+import { selectedPagination } from "../RankedPoliticians";
 
 
 
@@ -89,7 +90,10 @@ function SingleParty(props: {
               // background: voteInfo.background,
               borderRadius: "5px",
             }}
-            onClick={() => props.onClick(props.party)}
+            onClick={() => {
+              selectedPagination.next(1)
+              props.onClick(props.party)
+            }}
             className={`btn btn-primary`}
           >
             Daugiau

@@ -5,6 +5,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/c89f8b324b5211e78869ae36ddd5784f?jfwid=11raxi8twd",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501155&p_bals_id=-26416#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=lFZ8yO0Rw4M",
+    "summary": "Alkoholį legaliai bus galima vartoti tik sulaukus 20 metų; Parduotuvėse ir viešojo maitinimo įstaigose prekiauti alkoholiu bus leidžiama darbo dienomis ir šeštadieniais nuo 10 iki 20 val., sekmadieniais nuo 10 iki 15 val.; Uždrausta alkoholio reklama.;",
+    "argumentFor": "Padės mažinti didelį alkoholio vartojimą. Dėl didelio alkoholio vartojimo formuojasi negatyvūs socialiniai reiškiniai, skatinamas smurtas, nusikaltimai.",
+    "argumentAgainst": "Tam kad aštuoniolikmečiai galėtų vartoti alkoholį turės laukti dvidešimties metų; Kadangi informacija apie gėrimą prilyginama reklamai, jos teikti negalima, dėl ko ribojamos žmonių teisės.;",
     "legislationId": "-26416",
     "votes": [
       {
@@ -997,11 +1000,14 @@
     ]
   },
   {
-    "order": "Naujasis darbo kodeksas",
+    "order": "Naujasis darbo kodeksas, su kuriuo siekiama liberalizuoti darbdavių santykius.",
     "fullOrder": "Lietuvos Respublikos darbo kodekso patvirtinimo, įsigaliojimo ir įgyvendinimo įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/10c6bfd07bd511e6a0f68fd135e6f40c?jfwid=nj21znl9c",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=106&p_fakt_pos_id=-501047&p_bals_id=-24170#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=uDOza1uG73c",
+    "summary": "Numatyta galimybė sudaryti neterminuotas, terminuotas, laikinojo darbo, pameistrystės, projektinio darbo, darbo vietos dalijimosi, darbo keliems darbdaviams bei sezoninio darbo sutartis.; Terminuotas darbo sutartis nuolatiniam darbui leidžiama sudaryti ir tada jeigu dėl to darbuotojai ir darbdaviai nesusitars kolektyvinėje sutartyje.; Darbdaviai kurie dels atsiskaityti su atleistais darbuotojais privalės mokėti 3 mėnesių vidutinio atlyginimo netesybas.; Kai darbo sutartis nutraukiama darbdavio iniciatyva be darbuotojo kaltės, vienoje vietoje dirbusiam vienerius ar keletą metų bus išmokama dviejų vidutinių darbo užmokesčių, o iki metų, pusės darbo užmokesčio išmoka.; Nuo 2017 bus galima dirbti ne daugiau kaip 180 valandų viršvalandžių per metus (60 valandų daugiau nei prieš tai).; Už viršvalandžius darbdavys galės atsiskaityti arba pinigais arba atostogomis.; Kasmetinės atostogos skaičiuojamos darbo, o ne kalendorinėmis dienomis.",
+    "argumentFor": "Paskatins eksportą, nes Lietuva taps konkurencingesnė, lankstesnė ir daug pažangesnė vertinant tarptautinėje aplinkoje. ",
+    "argumentAgainst": "Išbalansuotos darbuotojų ir darbdavių galios, suteikiant daugiau galios darbdaviams.; Sumažintos garantijos neįgaliesiems;",
     "legislationId": "-24170",
     "votes": [
       {
@@ -1985,6 +1991,7 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/028b05207b9c11e89188e16a6495e98c?jfwid=nj21znmj6",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=111&p_fakt_pos_id=-501268&p_bals_id=-30826#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=0nEfsyL5y2A&feature=emb_title",
+    "summary": "Nebeliko „Sodros“ pervedimų į privačius pensijų fondus, todėl kaupimas nebereiškia „Sodros“ senatvės pensijos mažėjimo, kaip kad buvo iki šiol.; Dirbantys žmonės gali kaupti 3 proc. nuo savo darbo užmokesčio arba turi galimybę pradėti nuo 1,8 proc. ir 3 proc. pasiekti per penkerius metus.;",
     "legislationId": "-30826",
     "votes": [
       {
@@ -4969,6 +4976,8 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/7d592952f37411e6be918a531b2126ab?jfwid=nj21zow1x",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=108&p_fakt_pos_id=-501097&p_bals_id=-25491#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=sAsQhEIHvoc",
+    "argumentFor": "Siekiama užtikrinti vaikų saugumą",
+    "argumentAgainst": "Atėmus iš šeimos galimybę auklėti vaikus, galima padaryti daugiau žalos negu naudos.; Įstatyme nekalbama apie vaiko pareigas, bei tinkamą jo auklėjimą.\n;  Tėvams sukuriamas papildomas stresas, kas gali neigiamai paveikti visą šeimą.;",
     "legislationId": "-25491",
     "votes": [
       {
@@ -5959,6 +5968,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/983dc70166c711e7a53b83ca0142260e?jfwid=nj21zowhs",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501165&p_bals_id=-27100#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=t5wcVxp3g-U",
+    "summary": "Panaikintas konkretus miškų urėdijų skaičius, o šiuo metu veikiantys juridiniai asmenys bus sujungti į vieną valstybės valdomą įmonę.",
+    "argumentFor": "Leis efektyviau valdyti valstybinius miškus, išvengti administracinių išteklių švaistymo, daugiau dėmesio skirti tiesioginiam darbui miške, ir didinti valstybės turto finansinę grąžą.; Centralizuotai vykdoma prekyba mediena.\n; Apribojami galimi interesų konfliktai.;",
+    "argumentAgainst": "Esant dabartinei sistemai, Lietuva lenkia kitas valstybes su iš miškų gaunama grąža. Dėl ko įmonių apjungimas gali neduoti naudos kurios tikimasi gauti.;Apjungus įmones sukuriama monopolija. ;",
     "legislationId": "-27100",
     "votes": [
       {
@@ -6956,6 +6968,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/c6dd7dc2e23411e6be918a531b2126ab?jfwid=nj21zoxk0",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=107&p_fakt_pos_id=-501095&p_bals_id=-25473#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=ufQhJv7VqsY&t=67s",
+    "summary": "Didinamas viešojo sektoriaus darbuotojų, dirbančių pagal darbo sutartis, darbo užmokestis.; Valstybės bei savivaldybių darbuotojams bus taikomas vienodas bazinis algos dydis 130,5 EUR.; Darbo užmokestį sudarys pareiginė alga, pastovioji ir kintamoji dalys, arba tik pastovioji dalis, priemokos, mokėjimas už darbą poilsio ir švenčių dienomis, nakties ir viršvalandinį darbą bei budėjimą, premijos.;",
+    "argumentFor": "Atsiranda daugiau aiškumo ir skaidrumo.; Atsiranda erdvė derybomis dėl aukštesnio atlyginimo.; Siekimiama derėtis dėl atlyginimų nacionalinėje kolektyvinėje sutartyje.;",
+    "argumentAgainst": "Didesnės biudžeto išlaidos atlyginimams. ",
     "legislationId": "-25473",
     "votes": [
       {
@@ -7948,11 +7963,14 @@
     ]
   },
   {
-    "order": "Saugomų teritorijų įstatymo patasos",
+    "order": "Saugomų teritorijų įstatymo pataisos",
     "fullOrder": "Lietuvos Respublikos saugomų teritorijų įstatymo Nr. I-301 1, 2, 5, 7, 9, 13, 16, 18, 20, 23, 24-1, 25, 27, 29, 30, 31, 32 straipsnių ir priedo pakeitimo ir Įstatymo papildymo 32-1 straipsniu įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/11eab3f2969011e68adcda1bb2f432d1?jfwid=nj21zoxo3",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=106&p_fakt_pos_id=-501055&p_bals_id=-24554#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=RF37AIPBvfo",
+    "summary": "Siekiama sumažinti veiklą saugomose teritorijose reglamentuojančių dokumentų skaičių.; Leista statyta atsinaujinančios energijos įtaisus. ;  Uždrausta statyta tvoras penkių metrų atstumu iki vandens telkinio.;",
+    "argumentFor": "Geresnis veiklos saugomose teritorijose reglamentavimas, ir jų apsaugos bei tvarkymo valdymas.",
+    "argumentAgainst": "Draudimas statyta tvoras ūkininkams bus žalingas.",
     "legislationId": "-24554",
     "votes": [
       {
@@ -8938,11 +8956,14 @@
     ]
   },
   {
-    "order": "Pagalbinio apvaisinimo įstatymas.  Pagal įstatymą embrionų turės būti sukuriama tiek, kiek vienu metu jų bus perkelta į moters organizmą. Sukurtų embrionų skaičius negalės viršyti trijų.",
+    "order": "Pagalbinio apvaisinimo įstatymas. ",
     "fullOrder": "Lietuvos Respublikos pagalbinio apvaisinimo įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/f31c44c27bd711e6a0f68fd135e6f40c?jfwid=nj21zoxwl",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=106&p_fakt_pos_id=-501047&p_bals_id=-24176#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=ye5R5SsX9TY",
+    "summary": "Pagal įstatymą embrionų turės būti sukuriama tiek, kiek vienu metu jų bus perkelta į moters organizmą.; Sukurtų embrionų skaičius negali viršyti trijų. ;",
+    "argumentFor": "Gyvybę saugoti būtina nuo pradėjimo momento.; Tik dievas turi teisę spręsti kas gyvens, o kas mirs.; Kol nebuvo šio įstatymo nevaisingos šeimos negalėjo tikėtis gydymo išlaidų kompensavimo.;",
+    "argumentAgainst": "Turėtų būti neribojamas sukuriamų embrionų skaičius, tai leistų tausoti moters sveikatą, būtų užtikrinama didesnė procedūros sėkmė.; Dideli kaštai leis pasinaudoti procedūra tik turtingiausiems žmonėms.;  Turės būti reglamentuota iki šio įstatymo sukurtų embrionų apsauga.;",
     "legislationId": "-24176",
     "votes": [
       {
@@ -9926,6 +9947,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/e889e58037ad11e6a222b0cd86c2adfc?jfwid=nj21zoy1k",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=105&p_fakt_pos_id=-501024&p_bals_id=-23365#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=KolVa0YMc3I",
+    "summary": "Sudaro galimybę šauliams bei kariams savanoriams tarnybos metu nešiotis B ir C kategorijų ilguosius ir trumpuosius ginklus, jų šovinius. O ne tarnybos metu, savigynos tikslais nešiotis B ir C kategorijų trumpuosius šaunamus ginklus, ir jų šovinius.; Nepaprastosios padėties atveju, šauliai galės būti panaudoti kaip sudedamoji tvarkos apsaugos komendantūros dalis.; Šauliai įsigyti ginklus galės tik saulaukę 18 metų, išlaikę egzaminą ir gavę leidimą.;",
+    "argumentFor": "Padės sustiprinti šalies saugumą; Valstybės gynyba neturėtų būti palikta tiktai kariuomenei, tai yra visos visuomenės reikalas.; Šauliai, įsigydami ginklus už savo pinigus, prisideda prie krašto apsaugos.;",
+    "argumentAgainst": "Kaip bus užtikrinta, kad ginklai neatsidurtų netinkamose rankose?; Išduodant medžioklinius šautuvus savigynai, jie gali būti panaudoti neteisėtai medžioklei. ;",
     "legislationId": "-23365",
     "votes": [
       {
@@ -10911,11 +10935,12 @@
     ]
   },
   {
-    "order": "Pranešėjų apsaugos įstatymas, kuriame nustatytos apie pažeidimus įstaigose pranešusių asmenų teisinės apsaugos pagrindus ir formas, taip pat skatinimo ir pagalbos priemones.",
+    "order": "Pranešėjų apsaugos įstatymas.",
     "fullOrder": "Lietuvos Respublikos pranešėjų apsaugos įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/3832a702d8ea11e782d4fd2c44cc67af?jfwid=nj21zoy58",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=110&p_fakt_pos_id=-501213&p_bals_id=-27939#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=bFqxFHBD_Zg",
+    "summary": "Nustato apie pažeidimus įstaigose pranešusių asmenų teisinės apsaugos pagrindus ir formas, taip pat skatinimo ir pagalbos priemones.; Siekiama sudaryti tinkamas galimybes asmenims pranešti apie teisės pažeidimus, keliančius grėsmę viešajam interesui.; Padės užtikrinti pažeidimų prevenciją ir atskleidimą.; Pranešusiam užtikrinama nemokama teisinė pagalba, ir atlygis už vertingą informaciją.; ",
     "legislationId": "-27939",
     "votes": [
       {
@@ -11913,6 +11938,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/7c601dc0855f11e6a0f68fd135e6f40c",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=106&p_fakt_pos_id=-501051&p_bals_id=-24319#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=LORJLqrzXNY",
+    "summary": "Savivaldybės tarybai per du mėnesius nepaskyrus naujo vicemero, administracijos direktoriaus, ar nesudarius nors vienos komisijos, gali būti įvestas tiesioginis valdymas.",
+    "argumentFor": "Reglamentuota, kada gali būti laikinai įvedamas tiesioginis valdymas.",
+    "argumentAgainst": "Gali paskatinti pirmalaikius savivaldos rinkimus.;  Tam tikrais atvejais, taryba gali likti tik kaip formalus organas, o visus sprendimus priims meras.;",
     "legislationId": "-24319",
     "votes": [
       {
@@ -12903,6 +12931,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/9aec8760943811e59c9a8f8c9980906b?jfwid=nj21zoyg6",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=103&p_fakt_pos_id=-500961&p_bals_id=-21592#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=sps6AY81Rlo",
+    "summary": "Atvers kelią į Lietuvą perkelti nelegalius migrantus. Įstatymas taisomas atsižvelgiant į ES direktyvą, siekiant visoje ES sukurti vienodą migrantų priėmimo sistemą.",
+    "argumentFor": "Vyriausybė gali daug lanksčiau keisti sąlygas taikomas pabėgėliams, negu seimas. ",
+    "argumentAgainst": "Projekte nebeliko konkrečių nurodymų dėl pašalpų dydžių, apgyvendinimo terminų ir sąlygų.; Įstatymas suteikia geresnes sąlygas pabėgėliams negu mūsų pačių socialiai remiamiems žmonėms.;",
     "legislationId": "-21592",
     "votes": [
       {
@@ -13895,11 +13926,14 @@
     ]
   },
   {
-    "order": "Paskata jaunoms šeimoms įsigyti būstą regionuose",
+    "order": "Finansinės paskatos pirmąjį būsta įsigyjančioms jaunoms šeimoms įstatymas",
     "fullOrder": "Lietuvos Respublikos finansinės paskatos pirmąjį būstą įsigyjančioms jaunoms šeimoms įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/fbabd7a2785011e89188e16a6495e98c",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=111&p_fakt_pos_id=-501259&p_bals_id=-30407#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=ObapbIvYXAM",
+    "summary": "Siekiama padėti jaunoms šeimoms, nevertinant jų gaunamų pajamų ir turimo turto, apsirūpinti nuosavu pirmuoju būstu regionų teritorijose.; Nustatytos finansinės paskatos teikimo sąlygos, tvarka, reikalavimai kredito davėjams.\n15% subsidiją gaus jaunos šeimos be vaikų, 20% auginančios vieną vaiką, 25% - du vaikus, 30% - tris ir daugiau vaikų, padengiant iki 89 000 EUR paskolą.; Jeigu šeima neišgyvena 10 metų įsigytame būste, subsidiją turi grąžinti.; \n",
+    "argumentFor": "Sudarys galimybes jauniems žmonėms kurtis regionuose.",
+    "argumentAgainst": "Dar daugiau žmonių prasiskolins bankams.; Subsidijoms skiriamas per mažas biudžetas.; Nepaskatins žmonių grįžti į regionus.;",
     "legislationId": "-30407",
     "votes": [
       {
@@ -14890,6 +14924,8 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/ffe61ac21d9d11e6acbed8d454428fb7",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=105&p_fakt_pos_id=-501010&p_bals_id=-22939#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=NizimshGJok",
+    "summary": "Draudžiama organizuoti konkursus, akcijas, loterijas, kurie skatintų įsigyti, bei vartoti alkoholį.; Pažeidus įstatyma numatomas licencijos atėmimas. ;",
+    "argumentFor": "Siekiama sumažinti bendrąjį alkoholio suvartojimą, jo prieinamumą.; Tikimasi, kad įsigaliojus įstatymui, alkoholio suvartojimas sumažės 20 proc.;",
     "legislationId": "-22939",
     "votes": [
       {
@@ -15882,11 +15918,14 @@
     ]
   },
   {
-    "order": "Suskystintų gamtinių dujų terminalo įstatymo pakeitimai, kurie numato tolygų ir mažiausiai skausmingą vartotojams SGD terminalo ir suskystintų dujų tiekimo kaštų paskirstymą vartotojams.",
+    "order": "Suskystintų gamtinių dujų terminalo įstatymo pakeitimai",
     "fullOrder": "Lietuvos Respublikos suskystintų gamtinių dujų terminalo įstatymo Nr. XI-2053 2, 5 ir 11 straipsnių pakeitimo įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/237ba5d28f5b11e59c9a8f8c9980906b",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=103&p_fakt_pos_id=-500956&p_bals_id=-21462#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=x2PPPUdihlI",
+    "summary": "Numato tolygų ir mažiausiai skausmingą vartotojams SGD terminalo ir suskystintų dujų tiekimo kaštų paskirstymą vartotojams.; Siekiama paskirstyti platesniam vartotojų ratui dujų infrastruktūros sąnaudas.;",
+    "argumentFor": "Dujų terminalas bus išlaikomas tik dujų vartotojų lėšomis.; Bendrai, šilumos kainos Lietuvos vartotojams turėtų sumažėti.; Išvengiama didelio dujų kainos didėjimo didžiuosiuose Lietuvos miestuose.;",
+    "argumentAgainst": "Tam tikriems vartotojams dujos gali brangti (pvz. naudojantiems biokurą).",
     "legislationId": "-21462",
     "votes": [
       {
@@ -16884,6 +16923,7 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/b9d8a4620a2511e78dacb175b73de379",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501099&p_bals_id=-25524#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=En9IPxhYxiw",
+    "summary": "Vaikai galės būti apklausiami tik specialiose patalpose.; Mažamečiai vaikai visuomet turi būti apklausiami dalyvaujant psichologui, kiti nepilnamečiai turi būti apklausiami dalyvaujant psichologui tik tam tikrais atvejais.; Kaltinamojo atstovai galės užduoti klausimus stebint apklausą iš kitos patalpos.; Tėvai galės dalyvauti tik įsitikinus, kad nedarys poveikio liuditojo arba nukentėjusiojo parodymams.;",
     "legislationId": "-25524",
     "votes": [
       {
@@ -17869,11 +17909,14 @@
     ]
   },
   {
-    "order": "Lobistinės veiklos įstatymo pakeitimai, kuriais siekiama užtikrinti lobistinės veiklos viešumą ir skaidrumą, užkirsti kelią neteisėtai lobistinei veiklai. ",
+    "order": "Lobistinės veiklos įstatymo pakeitimai",
     "fullOrder": "Lietuvos Respublikos lobistinės veiklos įstatymo Nr. VIII-1749 pakeitimo įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/bbd30f50574911e78869ae36ddd5784f",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501144&p_bals_id=-26624#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=-HvI3rWlmoc",
+    "summary": "Siekiama užtikrinti lobistinės veiklos viešumą ir skaidrumą, užkirsti kelią neteisėtai lobistinei veiklai.; Įstatymo nuostatos nebus taikomos nevyriausybinėms organizacijoms.; Aiškiau apibrėžta, kas tie asmenys kuriems gali būti daroma lobistinė įtaka.; Atsiranda prievolė lobistams aiškiau deklaruoti savo santykį, ir tą dalyką daryti greičiau.; Lobistui draudžiama teikti dovanas ir žadėti atlygį už priimtą, ar nepriimtą sprendimą, o pačiam asmeniui priimti dovanas ar kitokį atlygį.; ",
+    "argumentFor": "Aiškesnis lobistinės veiklos reglamentavimas.",
+    "argumentAgainst": "Pakeitimai laukiamų pokyčių neatneš.; Visi asmenys galės būti laikomi lobistais.;",
     "legislationId": "-26624",
     "votes": [
       {
@@ -18871,6 +18914,7 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/aba447b0345a11e6a222b0cd86c2adfc",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=105&p_fakt_pos_id=-501022&p_bals_id=-23295#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=N9eYs_Iu-ko",
+    "summary": "Nuo 3 iki 6 mėnesių prailgintas parašų rinkimų terminas.",
     "legislationId": "-23295",
     "votes": [
       {
@@ -19861,6 +19905,7 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/9a0dd6b2660411e7a53b83ca0142260e",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501159&p_bals_id=-26948#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=sUxqxrT6SJk",
+    "summary": "Padės užtikrinti Lietuvos bei ES išorės sienų sienų saugumą.; Sudaroma galimybė kelias įstaigas apjungti į vieną juridinį asmenį, o iš sutaupytų lėšų bus didinamas apmokėjimas tarnaujantiems žmonėms.;",
     "legislationId": "-26948",
     "votes": [
       {
@@ -21855,6 +21900,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/4bca0e02892011e5bca4ce385a9b7048",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=103&p_fakt_pos_id=-500949&p_bals_id=-21318#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=zrX3nI_fAvw",
+    "summary": "Siekiama reguliuoti vartojimo kredito rinką, taip kad kredito davėjai skolintų, o gavėjai skolintųsi atsakingiau.; Nuspręsta uždrausti “naktinius” kreditus (nebus išmokamos vartojimo kredito lėšos nuo 22 val. iki 7 val.).; Sutartis negalės būti sudaroma su jaunesniu nei 18 metų asmeniu.; Greitųjų paskolų bendros palūkanos mažinamos daugiau nei 2 kartus, nuo 200 proc. iki 75 proc.; Bendra paskolos kaina negalės būti didesnė už bendrą paskolos sumą. ; Už pažeidimus įmonėms bus skiriamos iki 2 900 EUR, arba iki 1 proc. metinių pajamų baudos, o už pakartotinius pažeidimus iki 10 proc.; Galima nemokamai atsisakyti kredito per 2 dienas. ; Draudžiama skleisti vartojimo kredito reklamą renginiuose skirtuose nepilnamečiams. ;",
+    "argumentFor": "Siekiama reguliuoti vartojimo kredito rinką, taip kad kredito davėjai skolintų, o gavėjai skolintųsi atsakingiau.",
+    "argumentAgainst": "Lietuvoje turime griežčiausią reguliavimą.; Nelegaliai dirbančiai įmonei mažesnės baudos nei legaliai dirbančiai.;",
     "legislationId": "-21318",
     "votes": [
       {
@@ -22847,11 +22895,14 @@
     ]
   },
   {
-    "order": "Nustatytos aiškios pensijų indeksavimo taisyklės, taip pat palaipsniui didinamas būtinojo stažo reikalavimas visai senatvės pensijai gauti nuo 30 iki 35 metų",
+    "order": "Naujas pensijų skaičiavimo būdas",
     "fullOrder": "Lietuvos Respublikos valstybinio socialinio draudimo įstatymo Nr. I-1336 pakeitimo įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/adf586f244fe11e68f45bcf65e0a17ee",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=105&p_fakt_pos_id=-501027&p_bals_id=-23776#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=Tg94p08JKKA",
+    "summary": "Nustatytos aiškios pensijų indeksavimo taisyklės.;  Palaipsniui didinamas būtinojo stažo reikalavimas visai senatvės pensijai gauti nuo 30 iki 35 metų.;",
+    "argumentFor": "Padės subalansuoti socialinio draudimo sistemą.; Siekiama ilgiau išlaikyti žmones darbo rinkoje.; Didės pensijos.; Nebus galimas pensijų mažinimas.;",
+    "argumentAgainst": "Žmonės turės ilgiau dirbti tam, kad gautų pensiją. ",
     "legislationId": "-23776",
     "votes": [
       {
@@ -23842,6 +23893,7 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/f6fdafd05bd211e7a53b83ca0142260e",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501145&p_bals_id=-26711#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=vnBsD10Iy7A",
+    "argumentFor": "Siekiama skatinti valstybei skolingus asmenis ieškoti būdų ir priemonių sumokėti baudas.; Turėtų labiau motyvuoti asmenis nepadaryti kito pažeidimo.;",
     "legislationId": "-26711",
     "votes": [
       {
@@ -24834,11 +24886,13 @@
     ]
   },
   {
-    "order": "Švietimo įstatymo pataisos, kuriomis numatoma sukurti kovos su smurtu sistemą visose šalies bendrojo ugdymo mokyklose ir profesinio mokymo įstaigose, reglamentuoti pranešimo apie patyčias kibernetinėje erdvėje tvarką.",
+    "order": "Švietimo įstatymo pataisos su kuriomis siekiama sukurti kovos su smurtu sistemą mokyklose",
     "fullOrder": "Lietuvos Respublikos švietimo įstatymo Nr. I-1489 1, 2, 19, 23, 43, 46, 47, 49, 56, 58, 59 straipsnių pakeitimo ir Įstatymo papildymo 23-1, 23-2 straipsniais įstatymas",
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/17d94ea2976411e68adcda1bb2f432d1",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=106&p_fakt_pos_id=-501055&p_bals_id=-24558#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=QTDCLlZ14UM",
+    "summary": "Numatoma sukurti kovos su smurtu sistemą visose šalies bendrojo ugdymo mokyklose ir profesinio mokymo įstaigose.; Reglamentuota pranešimo apie patyčias kibernetinėje erdvėje tvarka.; Švietimo įstaigos vadovas apie pastebėtą smurto atvejį nedelsdamas turės pranešti smurtaujančių ir smurtą patyrusių mokinių tėvams ir atsakingoms institucijoms.; Apibrėžtos papildomos smurto formos.; Tiek smurto prieš vaikus, tiek smurto prieš mokytojus prevencija.;",
+    "argumentFor": "Užkirs kelią nuslėpti su smurtu siejamus įvykius.",
     "legislationId": "-24558",
     "votes": [
       {
@@ -25829,6 +25883,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/85f85c303c6111e79f4996496b137f39",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501127&p_bals_id=-26109#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=Ufk83-6u-bo",
+    "summary": "Valstybės ir savivaldybių įmonių vadovai į darbą bus priimami tik konkursų būdu penkeriems metams.; Tas pats asmuo tos pačios įmonės vadovu galės būti ne daugiau kaip dvi kadencijas iš eilės.; Po pirmosios kadencijos, antrajai kadencijai vadovas galės būti skiriamas atsižvelgiant į tai ar bendrovė pasiekė visus numatytus tikslus.;",
+    "argumentFor": "Efektyvi kovojimu su korupcija priemonė. ",
+    "argumentAgainst": "Kai kurie vadovai po 10 metų nebegalės susirasti darbo.",
     "legislationId": "-26109",
     "votes": [
       {
@@ -26819,6 +26876,8 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/34ac9b403c5611e68f278e2f1841c088",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=7&p_ses_id=105&p_fakt_pos_id=-501041&p_bals_id=-23624#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=crM2Xew2y3w",
+    "summary": "Užtikrinama tarpukariu iš Lietuvos išvykusių žydų bei jų palikuonių teisė atkurti Lietuvos pilietybę.",
+    "argumentFor": "Svarbus istorinio teisingumo prasme.",
     "legislationId": "-23624",
     "votes": [
       {
@@ -27809,6 +27868,9 @@
     "linkToOrder": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/e668d82060b411e7a53b83ca0142260e",
     "linkToVotes": "https://www.lrs.lt/sip/portal.show?p_r=37067&p_k=1&p_kade_id=8&p_ses_id=109&p_fakt_pos_id=-501149&p_bals_id=-26826#balsKlausimas",
     "youtubeUrl": "https://www.youtube.com/watch?v=-RC18czK6Hs",
+    "summary": "Vilniuje ir Kaune bus po vieną klasikinį, plačios tyrimų apimties universitetą, taip pat veiks profiliniai, technologijų, sveikatos mokslų ir menų universitetai.; Klaidpėdoje ir Šiauliuose išliks regionų poreikius atitinkantys ir išskirtumu pasižymintys universitetinio mokslo centrai, kurie bus kitų universitetų padaliniai.; Nutarime įvardijami svarbiausi Lietuvos universitetai: Vilniaus universitetas, Vilniaus Gedimino technikos universitetas, Lietuvos sveikatos mokslų universitetas ir Kauno technologijos universitetas.;",
+    "argumentFor": "Sukuria prielaidas tiek studijų tiek mokymosi kokybės gerinimui. ",
+    "argumentAgainst": "Kaip bus išrinktas klasikinis universitetas?; Ne visi universitetai bus lengvai prijungiami;",
     "legislationId": "-26826",
     "votes": [
       {
