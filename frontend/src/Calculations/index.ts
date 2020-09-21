@@ -208,7 +208,7 @@ export namespace Score {
                 }
                 const score = politcianScore / userScore
                 return {
-                    [politicianId]: (score + 1) / 2,
+                    [politicianId]: score,
                 };
             })
             .reduce((acc, current) => {
@@ -217,9 +217,6 @@ export namespace Score {
                     ...current,
                 };
             }, {} as Record<string, number>)
-            console.log("finalNormalizedScores",
-            finalNormalizedScores
-            )
         return {
             p: finalNormalizedScores,
             userScore

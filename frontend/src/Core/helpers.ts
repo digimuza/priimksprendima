@@ -44,8 +44,13 @@ export namespace Colors {
             return 'dark';
         }
     }
-
-    export function textColor(backgroundColor: string, options?: { lightTextColor?: string, darkTextColor?: string }) {
+    
+    /**
+     * Selects apropriote color for based on background
+     * @param backgroundColor
+     * @param options 
+     */
+    export function correctBackgroundTextColor(backgroundColor: string, options?: { lightTextColor?: string, darkTextColor?: string }) {
         const { darkTextColor = "#333", lightTextColor = "#fff" } = options || {}
         return lightOrDark(backgroundColor) === 'dark' ? lightTextColor : darkTextColor
     }

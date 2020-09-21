@@ -5,9 +5,9 @@ export interface Legislation {
     order: string;
     youtubeUrl: string;
     fullOrder: string;
-    summary: string,
-    argumentFor: string,
-    argumentAgainst: string,
+    summary?: string,
+    argumentFor?: string,
+    argumentAgainst?: string,
     linkToOrder: string;
     votes: ReadonlyArray<{
         legislationId: string;
@@ -31,9 +31,9 @@ export namespace Legislation {
     export const schema = z.object({
         legislationId: z.string(),
         order: z.string(),
-        summary: z.string(),
-        argumentFor: z.string(),
-        argumentAgainst: z.string(),
+        summary: z.string().optional(),
+        argumentFor: z.string().optional(),
+        argumentAgainst: z.string().optional(),
         youtubeUrl: z.string(),
         fullOrder: z.string(),
         linkToOrder: z.string(),

@@ -1,0 +1,37 @@
+.MinMaxBar {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  .MinMaxBar_bar {
+    height: 9px;
+    overflow: hidden;
+    background: #e0e0e0;
+  }
+  .MinMaxBar_plus {
+    width: calc(50% - 5px);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    .MinMaxBar_inner_bar {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background: #6cbf57;
+      height: 100%;
+    }
+  }
+  .MinMaxBar_minus {
+    width: calc(50% - 5px);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform: rotate(180deg);
+    .MinMaxBar_inner_bar {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background: #ff0000;
+      height: 100%;
+    }
+  }
+  .MinBar_center {
+    width: 5px;
+    background: #333;
+  }
+}

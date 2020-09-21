@@ -1,5 +1,5 @@
-import React, { useState, Fragment, useMemo, useEffect } from "react";
-import { List, Progress, Button, Input, Row, Col, Tag, Select } from "antd";
+import React, { useState, Fragment, useMemo } from "react";
+import { List, Progress, Input, Row, Col, Select } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import * as P from "ts-prime";
 import { Politician, Core } from "../../Core";
@@ -9,6 +9,7 @@ import { AutoComplete } from "antd";
 import { BehaviorSubject } from "rxjs";
 import { useObservable } from "../../Helpers/rxjs";
 import { imageFolder } from "../../Helpers";
+import { MinMaxBar } from "../Common/ProgressBar";
 
 function SinglePolitician(props: {
   politician: Politician.WithInfo;
@@ -37,7 +38,7 @@ function SinglePolitician(props: {
                     >
                       <Avatar
                         style={{
-                          color: Colors.textColor(
+                          color: Colors.correctBackgroundTextColor(
                             info?.[props.politician.politicalPartyId]?.color ||
                               "#000"
                           ),
@@ -52,7 +53,7 @@ function SinglePolitician(props: {
                   ) : (
                     <Avatar
                       style={{
-                        color: Colors.textColor(
+                        color: Colors.correctBackgroundTextColor(
                           info?.[props.politician.politicalPartyId]?.color ||
                             "#000"
                         ),
@@ -79,21 +80,23 @@ function SinglePolitician(props: {
               </div>
               <div style={{ height: 10 }}></div>
               {props.politician.activityData ? (
-                <Progress
-                  key={props.politician.id}
-                  strokeColor={{
-                    from: "#108ee9",
-                    to: "#87d068",
-                  }}
-                  showInfo={false}
-                  percent={props.politician.score * 100}
-                ></Progress>
+                <MinMaxBar value={props.politician.score}></MinMaxBar>
+                // <Progress
+                //   key={props.politician.id}
+                //   strokeColor={{
+                //     from: "#108ee9",
+                //     to: "#87d068",
+                //   }}
+                //   showInfo={false}
+                //   percent={props.politician.score * 100}
+                // ></Progress>
               ) : (
                 <div style={{ width: "90%" }}>
                   <div>
                     <strong>Neturime duomenų</strong>
                   </div>
-                  <Progress
+                  <MinMaxBar value={0}></MinMaxBar>
+                  {/* <Progress
                     key={props.politician.id}
                     strokeColor={{
                       from: "#108ee9",
@@ -102,7 +105,7 @@ function SinglePolitician(props: {
                     showInfo={false}
                     status={"exception"}
                     style={{ height: 15 }}
-                  ></Progress>
+                  ></Progress> */}
                 </div>
               )}
               <div style={{ height: 10 }}></div>
@@ -162,12 +165,12 @@ function SinglePolitician(props: {
   );
 }
 
-export const selectedPagination = new BehaviorSubject<number | null>(null)
+export const selectedPagination = new BehaviorSubject<number | null>(null);
 export function RankedPoliticianList(props: {
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
 }) {
-  const iSelectedPagination = useObservable(selectedPagination)
+  const iSelectedPagination = useObservable(selectedPagination);
   return (
     <Fragment>
       <List
@@ -215,7 +218,7 @@ export function RankedPoliticianList(props: {
         pagination={{
           current: iSelectedPagination ?? 1,
           onChange: (page) => {
-            selectedPagination.next(page)
+            selectedPagination.next(page);
           },
           hideOnSinglePage: true,
           pageSize: 10,
@@ -254,7 +257,7 @@ export function RankedPoliticianListWithSearchAndRegion(props: {
   }, [props.politicians]);
 
   function onChange(value: string) {
-    selectedPagination.next(1)
+    selectedPagination.next(1);
     if (value === "-") {
       selectedRegionSubject.next(null);
       return;

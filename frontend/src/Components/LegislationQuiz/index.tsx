@@ -92,8 +92,7 @@ function Slide(props: { legislation: Legislation }) {
       <div>
         <h6>Apibendrinimas</h6>
         <ul>
-          {props.legislation.summary
-            .split(";")
+          {props.legislation.summary?.split(";")
             .filter((q) => q)
             .map((q) => (
               <li>{q}</li>
@@ -105,8 +104,7 @@ function Slide(props: { legislation: Legislation }) {
           <div className={"legislation-arguments legislation-arguments-for"}>
             <h6>Už</h6>
             <ul>
-              {props.legislation.argumentFor
-                .split(";")
+              {props.legislation.argumentFor?.split(";")
                 .filter((q) => q)
                 .map((q) => (
                   <li>{q}</li>
@@ -120,8 +118,7 @@ function Slide(props: { legislation: Legislation }) {
           >
             <h6>Prieš</h6>
             <ul>
-              {props.legislation.argumentAgainst
-                .split(";")
+              {props.legislation.argumentAgainst?.split(";")
                 .filter((q) => q)
                 .map((q) => (
                   <li>{q}</li>
