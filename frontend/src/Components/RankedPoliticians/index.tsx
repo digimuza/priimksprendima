@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useMemo } from "react";
-import { List, Progress, Input, Row, Col, Select } from "antd";
+import { List, Progress, Input, Row, Col, Select, Checkbox } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import * as P from "ts-prime";
 import { Politician, Core } from "../../Core";
@@ -81,6 +81,7 @@ function SinglePolitician(props: {
               <div style={{ height: 10 }}></div>
               {props.politician.activityData ? (
                 <MinMaxBar value={props.politician.score}></MinMaxBar>
+              ) : (
                 // <Progress
                 //   key={props.politician.id}
                 //   strokeColor={{
@@ -90,7 +91,6 @@ function SinglePolitician(props: {
                 //   showInfo={false}
                 //   percent={props.politician.score * 100}
                 // ></Progress>
-              ) : (
                 <div style={{ width: "90%" }}>
                   <div>
                     <strong>Neturime duomenų</strong>
@@ -166,16 +166,41 @@ function SinglePolitician(props: {
 }
 
 export const selectedPagination = new BehaviorSubject<number | null>(null);
+export const onlyWithData = new BehaviorSubject<boolean>(false);
 export function RankedPoliticianList(props: {
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
 }) {
+  const onlyWithDataS = useObservable(onlyWithData);
   const iSelectedPagination = useObservable(selectedPagination);
   return (
     <Fragment>
       <List
         header={
-          <List.Item>
+          <List.Item
+            actions={[
+              <Checkbox
+                checked={!!onlyWithDataS}
+                onChange={(e) => {
+                  onlyWithData.next(e.target.checked);
+                }}
+              >
+                Politikai tik su duomenimis
+              </Checkbox>,
+              <button
+                onClick={() => {
+                  Core.Events.resetQuiz();
+                  Core.Navigator.pushPage({
+                    page: "LegislationQuizPage",
+                    payload: {},
+                  });
+                }}
+                className={"btn btn-success btn-sm"}
+              >
+                Kartoti
+              </button>,
+            ]}
+          >
             <div
               style={{
                 width: "100%",
@@ -197,21 +222,6 @@ export function RankedPoliticianList(props: {
               >
                 <strong>Politikai</strong>
               </div>
-
-              <div>
-                <button
-                  onClick={() => {
-                    Core.Events.resetQuiz();
-                    Core.Navigator.pushPage({
-                      page: "LegislationQuizPage",
-                      payload: {},
-                    });
-                  }}
-                  className={"btn btn-success btn-sm"}
-                >
-                  Kartoti
-                </button>
-              </div>
             </div>
           </List.Item>
         }
@@ -223,7 +233,15 @@ export function RankedPoliticianList(props: {
           hideOnSinglePage: true,
           pageSize: 10,
         }}
-        dataSource={P.sortBy(props.politicians, (q) => [-1 * q.score])}
+        dataSource={P.sortBy(
+          props.politicians.filter((q) => {
+            if (onlyWithDataS) {
+              return !!q.activityData;
+            }
+            return true;
+          }),
+          (q) => [-1 * q.score]
+        )}
         size={"default"}
         renderItem={(politician: Politician.WithInfo) => {
           return (

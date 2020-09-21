@@ -135,28 +135,40 @@ export namespace Core {
               return undefined;
             }
             const f = iPolitician[0];
+
+            const calculatePartyScore = P.pipe(
+              iPolitician,
+              P.filter((q) => !!q.activityData),
+              (s) => {
+                if (s.length === 0) {
+                  return 0  
+                }
+                return P.pipe(
+                  s,
+                  P.reduce((acc, current) => acc + current.score, 0),
+                  (q) => q / s.length,
+                )
+              }
+            )
+
             return {
               partyId: toId(f.politicalPartyName),
               politicalPartyName: f.politicalPartyName,
               politicalPartyNumber: f.politicalPartyNumber,
               size: iPolitician.length,
               politicians: iPolitician,
-              score: P.take(
-                P.sortBy(iPolitician, q => [!q.activityData, -1 * q.score]),
-                141
-              ).reduce((acc, current) => acc + current.score, 0),
+              score: calculatePartyScore  ,
             };
           })
           .filter(P.isDefined)
 
-        const max = Math.max(...parties.map(q => q.score));
         const withNormalizedScore = parties.map(w => {
-          const score = w.score / max;
           return {
             ...w,
-            score: score,
+            score: Math.tanh(w.score),
           };
         });
+        
         return {
           parties: withNormalizedScore,
           politicians

@@ -6,8 +6,7 @@ import Avatar from "antd/lib/avatar/avatar";
 import { useObservable } from "../../Helpers/rxjs";
 import { imageFolder } from "../../Helpers";
 import { selectedPagination } from "../RankedPoliticians";
-
-
+import { MinMaxBar } from "../Common/ProgressBar";
 
 function SingleParty(props: {
   party: PoliticalParty.WithInfo;
@@ -48,15 +47,7 @@ function SingleParty(props: {
                 </div>
               </div>
               <div style={{ width: "90%" }}>
-                <Progress
-                  strokeColor={{
-                    from: "#108ee9",
-                    to: "#87d068",
-                  }}
-                  showInfo={false}
-                  style={{ height: 15 }}
-                  percent={props.party.score * 100}
-                ></Progress>
+                <MinMaxBar value={props.party.score}></MinMaxBar>
               </div>
             </div>
             <div
@@ -91,8 +82,8 @@ function SingleParty(props: {
               borderRadius: "5px",
             }}
             onClick={() => {
-              selectedPagination.next(1)
-              props.onClick(props.party)
+              selectedPagination.next(1);
+              props.onClick(props.party);
             }}
             className={`btn btn-primary`}
           >
@@ -120,7 +111,23 @@ export function RankedParties(props: {
   return (
     <List
       header={
-        <List.Item actions={[]}>
+        <List.Item
+          actions={[
+            <button
+              onClick={() => {
+                console.log("Reset");
+                Core.Events.resetQuiz();
+                Core.Navigator.pushPage({
+                  page: "LegislationQuizPage",
+                  payload: {},
+                });
+              }}
+              className={"btn btn-success btn-sm"}
+            >
+              Kartoti
+            </button>,
+          ]}
+        >
           <div
             style={{
               width: "100%",
@@ -141,21 +148,6 @@ export function RankedParties(props: {
               }}
             >
               <strong>Partijos</strong>
-            </div>
-            <div>
-              <button
-                onClick={() => {
-                  console.log("Reset");
-                  Core.Events.resetQuiz();
-                  Core.Navigator.pushPage({
-                    page: "LegislationQuizPage",
-                    payload: {},
-                  });
-                }}
-                className={"btn btn-success btn-sm"}
-              >
-                Kartoti
-              </button>
             </div>
           </div>
         </List.Item>
