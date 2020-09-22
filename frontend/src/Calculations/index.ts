@@ -76,7 +76,7 @@ export namespace Score {
             data,
             P.map((legislation) => {
                 const userVote = userVotes[legislation.legislationId]
-                const userVote2 =  toPoliticianVote(userVotes[legislation.legislationId])
+                const userVote2 = toPoliticianVote(userVotes[legislation.legislationId])
                 const votingInfo = legislation.votes
                     .map((q) => q.vote)
                     .reduce(
@@ -138,12 +138,12 @@ export namespace Score {
                                 politicianVote.vote,
                                 userVotes[legislation.legislationId]
                             )
-                                if (polScore == null) {
-                                    debugger
-                                }
-                                if (legislationScore == null) {
-                                    debugger
-                                }
+                            if (polScore == null) {
+                                debugger
+                            }
+                            if (legislationScore == null) {
+                                debugger
+                            }
                             return {
                                 politicianId: q.id,
                                 politicianScore: polScore * legislationScore
@@ -156,7 +156,7 @@ export namespace Score {
                     legislationScore: legislationScore,
                     politiciansWithScores: politiciansWithScores,
                     userVote,
-                    userScore:  calculateDecisionScore(
+                    userScore: calculateDecisionScore(
                         userVote2,
                         userVote
                     ) * legislationScore
@@ -172,34 +172,34 @@ export namespace Score {
         userScore: number
     } {
 
-        const withoutSkipScores = iRawScores.filter((q)=> q.userVote !== User.Vote.SKIP)
+        const withoutSkipScores = iRawScores.filter((q) => q.userVote !== User.Vote.SKIP)
 
-        
+
         const userAverage = withoutSkipScores.reduce((acc, current) => acc + current.userScore, 0) / withoutSkipScores.length
         const userScore = userAverage * Math.pow(withoutSkipScores.length, 0.5)
-        console.log('USER_SCORE',{
-            scores: withoutSkipScores.map((q)=>q.userScore).reduce((acc, c)=>acc + c, 0) / withoutSkipScores.length,
+        console.log('USER_SCORE', {
+            scores: withoutSkipScores.map((q) => q.userScore).reduce((acc, c) => acc + c, 0) / withoutSkipScores.length,
             userScore
         })
         const scores = P.pipe(
             withoutSkipScores,
-            P.flatMap((q)=> q.politiciansWithScores),
+            P.flatMap((q) => q.politiciansWithScores),
             P.filter(P.isDefined),
-            P.groupBy((q)=> q.politicianId),
+            P.groupBy((q) => q.politicianId),
             (q) => Object.values(q),
-            P.map((politicians)=>{
-                const avarage = politicians.reduce((acc, current)=> acc + current.politicianScore,0) / politicians.length
+            P.map((politicians) => {
+                const avarage = politicians.reduce((acc, current) => acc + current.politicianScore, 0) / politicians.length
                 return {
-                    politcianScore: avarage * Math.pow( politicians.length, 0.5),
+                    politcianScore: avarage * Math.pow(politicians.length, 0.5),
                     politicianId: politicians[0].politicianId
                 }
             })
         )
-            const max = Math.max(...scores.map((q) => q.politcianScore))
-            const finalNormalizedScores = scores
-            .map(({politcianScore,politicianId}) => {
+        const max = Math.max(...scores.map((q) => q.politcianScore))
+        const finalNormalizedScores = scores
+            .map(({ politcianScore, politicianId }) => {
                 return {
-                    [politicianId]: Math.tanh((politcianScore / userScore)  * 4),
+                    [politicianId]: politcianScore / max,
                 };
             })
             .reduce((acc, current) => {

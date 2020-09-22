@@ -111,45 +111,30 @@ export function RankedParties(props: {
   return (
     <List
       header={
-        <List.Item
-          actions={[
-            <button
-              onClick={() => {
-                console.log("Reset");
-                Core.Events.resetQuiz();
-                Core.Navigator.pushPage({
-                  page: "LegislationQuizPage",
-                  payload: {},
-                });
-              }}
-              className={"btn btn-success btn-sm"}
-            >
-              Kartoti
-            </button>,
-          ]}
-        >
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                fontSize: 16,
-                minWidth: "50%",
-                flexGrow: 1,
-                maxWidth: "80%",
-                padding: 0,
-                paddingLeft: 0,
-                paddingRight: 10,
-              }}
-            >
-              <strong>Partijos</strong>
-            </div>
-          </div>
+        <List.Item>
+          <Row align={"middle"} style={{ width: "100%" }}>
+            <Col flex={1}>
+              <Row>
+                <Col>
+                  <strong>Politikai</strong>
+                </Col>
+              </Row>
+            </Col>
+            <Col>
+              <button
+                onClick={() => {
+                  Core.Events.resetQuiz();
+                  Core.Navigator.pushPage({
+                    page: "LegislationQuizPage",
+                    payload: {},
+                  });
+                }}
+                className={"btn btn-success btn-sm"}
+              >
+                Kartoti
+              </button>
+            </Col>
+          </Row>
         </List.Item>
       }
       pagination={{
