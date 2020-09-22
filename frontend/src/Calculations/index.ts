@@ -89,10 +89,7 @@ export namespace Score {
     }
     ////////////////////////////////////////////////////////////////////
     export function calculateRawScores(
-        politicians: readonly Politician[],
-        data: readonly Legislation[],
-        userVotes: Record<string, User.Vote>
-    ): ReadonlyArray<RankedLegislationsPolitciansIds> {
+        { politicians, data, userVotes }: { politicians: readonly Politician[]; data: readonly Legislation[]; userVotes: Record<string, User.Vote>; }): ReadonlyArray<RankedLegislationsPolitciansIds> {
         return P.pipe(
             data,
             P.map((legislation) => {

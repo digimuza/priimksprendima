@@ -82,7 +82,7 @@ export namespace Core {
       politiciansList, userVotes, legislationList, (politicians, userVotes, legislationList) => ({ politicians, userVotes, legislationList }),
     ).pipe(
       RXO.map(({ legislationList, politicians, userVotes }) => {
-        const rawScores = P.indexBy(Score.calculateRawScores(politicians, legislationList, userVotes), (q) => q.legislationId)
+        const rawScores = P.indexBy(Score.calculateRawScores({ politicians, data: legislationList, userVotes }), (q) => q.legislationId)
         return {
           legislationList: legislationList.map((q): Legislation.WithScore => {
             return {
@@ -102,8 +102,8 @@ export namespace Core {
       RXO.map(({
         politicians, legislationList, userVotes
       }) => {
-        const rawScores = Score.calculateRawScores(politicians, legislationList, userVotes)
-        const votes = P.pipe(rawScores.flatMap((q) => (q.politiciansWithScores || [])), P.groupBy((q)=> q.politicianId))
+        const rawScores = Score.calculateRawScores({ politicians, data: legislationList, userVotes })
+        const votes = P.pipe(rawScores.flatMap((q) => (q.politiciansWithScores || [])), P.groupBy((q) => q.politicianId))
         const normalized = Score.calculateNormalizedPoliticianScore(rawScores)
         return {
           politicianScores: politicians.map((iSinglePolitician): Politician.WithInfo => {
@@ -138,20 +138,25 @@ export namespace Core {
             }
             const f = iPolitician[0];
 
-            const calculatePartyScore = P.pipe(
+            const activePoliticians = P.pipe(
               iPolitician,
               P.filter((q) => !!q.activityData),
-              (s) => {
-                if (s.length === 0) {
-                  return 0
-                }
-                return P.pipe(
-                  s,
-                  P.reduce((acc, current) => acc + current.score, 0),
-                  (q) => q / s.length,
-                )
-              }
             )
+
+            const getPoliticianScore = (politicians: Politician.WithInfo[]) => {
+              if (politicians.length === 0) {
+                return 0
+              }
+              return P.pipe(
+                politicians,
+                P.reduce((acc, current) => acc + current.score, 0),
+                (q) => q / politicians.length,
+              )
+            }
+
+            const calculateStatisticalScore = () => {
+              return getPoliticianScore(activePoliticians) * Math.pow(activePoliticians.length, 0.5)
+            }
 
             return {
               partyId: toId(f.politicalPartyName),
@@ -159,7 +164,7 @@ export namespace Core {
               politicalPartyNumber: f.politicalPartyNumber,
               size: iPolitician.length,
               politicians: iPolitician,
-              score: calculatePartyScore,
+              score: calculateStatisticalScore(),
             };
           })
           .filter(P.isDefined)
@@ -178,8 +183,6 @@ export namespace Core {
       }),
       RXO.shareReplay(1),
     )
-
-
   }
 
   export namespace Events {
