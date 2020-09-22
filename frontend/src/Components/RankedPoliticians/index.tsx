@@ -91,22 +91,14 @@ function SinglePolitician(props: {
                 //   showInfo={false}
                 //   percent={props.politician.score * 100}
                 // ></Progress>
-                <div style={{ width: "90%" }}>
-                  <div>
-                    <strong>Neturime duomenų</strong>
-                  </div>
-                  <MinMaxBar value={0}></MinMaxBar>
-                  {/* <Progress
-                    key={props.politician.id}
-                    strokeColor={{
-                      from: "#108ee9",
-                      to: "#87d068",
-                    }}
-                    showInfo={false}
-                    status={"exception"}
-                    style={{ height: 15 }}
-                  ></Progress> */}
-                </div>
+                <Fragment>
+                  <Row style={{ width: "90%" }}>
+                    <Col>
+                      <strong>Neturime duomenų</strong>
+                    </Col>
+                  </Row>
+                  <MinMaxBar value={props.politician.score}></MinMaxBar>
+                </Fragment>
               )}
               <div style={{ height: 10 }}></div>
               <Row gutter={[5, 5]}>
@@ -143,6 +135,7 @@ function SinglePolitician(props: {
           }}
         >
           <button
+            disabled={!props.politician.activityData}
             style={{
               width: "95%",
               cursor: "pointer",
@@ -177,52 +170,42 @@ export function RankedPoliticianList(props: {
     <Fragment>
       <List
         header={
-          <List.Item
-            actions={[
-              <Checkbox
-                checked={!!onlyWithDataS}
-                onChange={(e) => {
-                  onlyWithData.next(e.target.checked);
-                }}
-              >
-                Politikai tik su duomenimis
-              </Checkbox>,
-              <button
-                onClick={() => {
-                  Core.Events.resetQuiz();
-                  Core.Navigator.pushPage({
-                    page: "LegislationQuizPage",
-                    payload: {},
-                  });
-                }}
-                className={"btn btn-success btn-sm"}
-              >
-                Kartoti
-              </button>,
-            ]}
-          >
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 16,
-                  minWidth: "50%",
-                  flexGrow: 1,
-                  maxWidth: "80%",
-                  padding: 0,
-                  paddingLeft: 0,
-                  paddingRight: 10,
-                }}
-              >
-                <strong>Politikai</strong>
-              </div>
-            </div>
+          <List.Item>
+            <Row align={"middle"} style={{ width: "100%" }}>
+              <Col flex={1}>
+                <Row>
+                  <Col>
+                    <strong>Politikai</strong>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Checkbox
+                      checked={!!onlyWithDataS}
+                      onChange={(e) => {
+                        onlyWithData.next(e.target.checked);
+                      }}
+                    >
+                      Politikai tik su duomenimis
+                    </Checkbox>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <button
+                  onClick={() => {
+                    Core.Events.resetQuiz();
+                    Core.Navigator.pushPage({
+                      page: "LegislationQuizPage",
+                      payload: {},
+                    });
+                  }}
+                  className={"btn btn-success btn-sm"}
+                >
+                  Kartoti
+                </button>
+              </Col>
+            </Row>
           </List.Item>
         }
         pagination={{

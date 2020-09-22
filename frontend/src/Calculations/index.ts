@@ -195,20 +195,11 @@ export namespace Score {
                 }
             })
         )
-            console.log('Poli', {
-                scores
-            })
-            console.log({
-                original: scores
-            })
+            const max = Math.max(...scores.map((q) => q.politcianScore))
             const finalNormalizedScores = scores
             .map(({politcianScore,politicianId}) => {
-                if (userScore == null) {
-                    debugger
-                }
-                const score = politcianScore / userScore
                 return {
-                    [politicianId]: score,
+                    [politicianId]: Math.tanh((politcianScore / userScore)  * 4),
                 };
             })
             .reduce((acc, current) => {

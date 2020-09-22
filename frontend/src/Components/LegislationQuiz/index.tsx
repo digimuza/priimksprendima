@@ -86,45 +86,56 @@ function Slide(props: { legislation: Legislation }) {
       </Typography.Title>
 
       <Typography.Paragraph>{legislation.fullOrder}</Typography.Paragraph>
-      <a href={legislation.linkToOrder} target={'_blank'}>Nuoroda į įstatymą</a>
+      <a href={legislation.linkToOrder} target={"_blank"}>
+        Nuoroda į įstatymą
+      </a>
       <br></br>
       <br></br>
-      <div>
-        <h6>Apibendrinimas</h6>
-        <ul>
-          {props.legislation.summary?.split(";")
-            .filter((q) => q)
-            .map((q) => (
-              <li>{q}</li>
-            ))}
-        </ul>
-      </div>
+      {props.legislation.summary && (
+        <div>
+          <h6>Apibendrinimas</h6>
+          <ul>
+            {props.legislation.summary
+              ?.split(";")
+              .filter((q) => q)
+              .map((q) => (
+                <li>{q}</li>
+              ))}
+          </ul>
+        </div>
+      )}
       <Row gutter={[10, 10]}>
         <Col md={12}>
-          <div className={"legislation-arguments legislation-arguments-for"}>
-            <h6>Už</h6>
-            <ul>
-              {props.legislation.argumentFor?.split(";")
-                .filter((q) => q)
-                .map((q) => (
-                  <li>{q}</li>
-                ))}
-            </ul>
-          </div>
+          {props.legislation.argumentFor && (
+            <div className={"legislation-arguments legislation-arguments-for"}>
+              <h6>Už</h6>
+              <ul>
+                {props.legislation.argumentFor
+                  ?.split(";")
+                  .filter((q) => q)
+                  .map((q) => (
+                    <li>{q}</li>
+                  ))}
+              </ul>
+            </div>
+          )}
         </Col>
         <Col md={12}>
-          <div
-            className={"legislation-arguments legislation-arguments-against"}
-          >
-            <h6>Prieš</h6>
-            <ul>
-              {props.legislation.argumentAgainst?.split(";")
-                .filter((q) => q)
-                .map((q) => (
-                  <li>{q}</li>
-                ))}
-            </ul>
-          </div>
+          {props.legislation.argumentAgainst && (
+            <div
+              className={"legislation-arguments legislation-arguments-against"}
+            >
+              <h6>Prieš</h6>
+              <ul>
+                {props.legislation.argumentAgainst
+                  ?.split(";")
+                  .filter((q) => q)
+                  .map((q) => (
+                    <li>{q}</li>
+                  ))}
+              </ul>
+            </div>
+          )}
         </Col>
       </Row>
     </Card>
