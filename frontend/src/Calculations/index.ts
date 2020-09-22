@@ -167,10 +167,7 @@ export namespace Score {
         p: Record<string, number>,
         userScore: number
     } {
-
         const withoutSkipScores = iRawScores.filter((q) => q.userVote !== User.Vote.SKIP)
-
-
         const userAverage = withoutSkipScores.reduce((acc, current) => acc + current.userScore, 0) / withoutSkipScores.length
         const userScore = userAverage * Math.pow(withoutSkipScores.length, 0.5)
         const scores = P.pipe(
@@ -187,7 +184,7 @@ export namespace Score {
                 }
             })
         )
-        const max = Math.max(...scores.map((q) => q.politcianScore))
+        const max = Math.max(...scores.map((q) => Math.abs(q.politcianScore)))
         const finalNormalizedScores = scores
             .map(({ politcianScore, politicianId }) => {
                 return {

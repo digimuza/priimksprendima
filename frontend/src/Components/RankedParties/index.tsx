@@ -16,7 +16,7 @@ function SingleParty(props: {
 
   return (
     <List.Item>
-      <Row style={{ width: "100%" }}>
+<      Row style={{ width: "100%" }}>
         <Col xs={18}>
           <div style={{ flexGrow: 1, display: "flex" }}>
             <div style={{ flexGrow: 1 }}>
@@ -32,7 +32,6 @@ function SingleParty(props: {
                 <div style={{ flexGrow: 1, paddingLeft: 0 }}>
                   <Row gutter={[5, 5]}>
                     <Col>
-                      {}
                       <Avatar
                         size={"large"}
                         src={imageFolder(
@@ -116,7 +115,7 @@ export function RankedParties(props: {
             <Col flex={1}>
               <Row>
                 <Col>
-                  <strong>Politikai</strong>
+                  <strong>Partijos</strong>
                 </Col>
               </Row>
             </Col>

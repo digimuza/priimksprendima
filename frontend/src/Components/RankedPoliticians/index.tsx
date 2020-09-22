@@ -82,11 +82,6 @@ function SinglePolitician(props: {
                         <strong>{props.politician.displayName} </strong>
                       )}
                     </Col>
-                    <Col>
-                      {!isNaN((1 - stats) * 100) && (
-                        <Tag>Lankomumas {((1 - stats) * 100).toFixed(0)}%</Tag>
-                      )}
-                    </Col>
                   </Row>
                 </div>
               </div>
@@ -160,7 +155,7 @@ function SinglePolitician(props: {
               borderRadius: "5px",
             }}
             onClick={() => props.onClick(props.politician)}
-            className={`btn btn-primary`}
+            className={`btn ${props.politician.activityData ? "btn-primary" : "btn-gray"}`}
           >
             Daugiau
           </button>

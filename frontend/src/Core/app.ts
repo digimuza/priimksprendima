@@ -163,7 +163,7 @@ export namespace Core {
             };
           })
           .filter(P.isDefined)
-        const max = Math.max(...parties.map((q) => q.score))
+        const max = Math.max(...parties.map((q) => Math.abs(q.score)))
         const withNormalizedScore = parties.map(w => {
           return {
             ...w,
