@@ -4,13 +4,9 @@ import * as P from 'ts-prime';
 import * as z from 'zod'
 
 export namespace Score {
+    ////////////////////////////////////////////////////////////////////
     function calculateLegislationScore(
-        _iMaxMembers: number,
-        iDecisionTreshold: number,
-        iFor: number,
-        iAgainst: number,
-        iAbstained: number
-    ): number {
+        { _iMaxMembers, iDecisionTreshold, iFor, iAgainst, iAbstained }: { _iMaxMembers: number; iDecisionTreshold: number; iFor: number; iAgainst: number; iAbstained: number; }): number {
         const participated = iFor + iAgainst + iAbstained;
         const votingMultiplier = 1 - Math.abs(iFor / participated - 0.5) / 0.5;
         const participationMultiplier =
@@ -19,7 +15,7 @@ export namespace Score {
                 : 2 - (participated - 71) / 71;
         return votingMultiplier * participationMultiplier;
     }
-
+    ////////////////////////////////////////////////////////////////////
     function voteToInt(iVote: Legislation.Vote): 0 | 1 | 2 | 3 {
         switch (iVote) {
             case Legislation.Vote.FOR:
@@ -32,89 +28,79 @@ export namespace Score {
                 return 3;
         }
     }
-
-    function calculateDecisionScore(
-        iPoliticianVote: Legislation.Vote,
-        iUserVote: User.Vote
-    ): number {
+    ////////////////////////////////////////////////////////////////////
+    function calculateDecisionScore(iPoliticianVote: Legislation.Vote, iUserVote: User.Vote): number {
         const weightsFor = [10, -10, -4, -5];
         const weightsAgainst = [-10, 10, -4, -3];
-
         return z.number().parse(iUserVote === User.Vote.FOR
             ? weightsFor[voteToInt(iPoliticianVote)]
             : weightsAgainst[voteToInt(iPoliticianVote)])
     }
-
+    ////////////////////////////////////////////////////////////////////
+    interface PoliticianTmpData {
+        politicianScore: number;
+        politicianId: string;
+        politicianVote?: Legislation.Vote
+    }
+    ////////////////////////////////////////////////////////////////////
     export interface RankedLegislationsPolitciansIds {
         legislationId: string;
         legislationScore: number;
         userScore: number
         userVote: User.Vote
-        politiciansWithScores:
-        | {
-            politicianScore: number;
-            politicianId: string;
-            politicianVote?: Legislation.Vote
-        }[]
-        | null;
+        politiciansWithScores: PoliticianTmpData[] | null;
     }
-
+    ////////////////////////////////////////////////////////////////////
     export function toPoliticianVote(q: User.Vote): Legislation.Vote {
-        if (q === '@') {
-            return Legislation.Vote.IDLE
-        }
-
+        if (q === '@') return Legislation.Vote.IDLE
         return q
     }
-
+    ////////////////////////////////////////////////////////////////////
+    function calculateLegislationParticipationData(legislation: Legislation) {
+        return legislation.votes
+            .map((q) => q.vote)
+            .reduce(
+                (acc, current) => {
+                    switch (current) {
+                        case Legislation.Vote.FOR:
+                            acc[Legislation.Vote.FOR]++;
+                            break;
+                        case Legislation.Vote.AGAINST:
+                            acc[Legislation.Vote.AGAINST]++;
+                            break;
+                        case Legislation.Vote.IDLE:
+                            acc[Legislation.Vote.IDLE]++;
+                            break;
+                        case Legislation.Vote.MISSING:
+                            acc[Legislation.Vote.MISSING]++;
+                            break;
+                    }
+                    acc.total += 1
+                    return acc;
+                },
+                {
+                    total: 0,
+                    [Legislation.Vote.AGAINST]: 0,
+                    [Legislation.Vote.FOR]: 0,
+                    [Legislation.Vote.IDLE]: 0,
+                    [Legislation.Vote.MISSING]: 0,
+                }
+            );
+    }
+    ////////////////////////////////////////////////////////////////////
     export function calculateRawScores(
         politicians: readonly Politician[],
         data: readonly Legislation[],
         userVotes: Record<string, User.Vote>
     ): ReadonlyArray<RankedLegislationsPolitciansIds> {
-
         return P.pipe(
             data,
             P.map((legislation) => {
                 const userVote = userVotes[legislation.legislationId]
                 const userVote2 = toPoliticianVote(userVotes[legislation.legislationId])
-                const votingInfo = legislation.votes
-                    .map((q) => q.vote)
-                    .reduce(
-                        (acc, current) => {
-                            switch (current) {
-                                case Legislation.Vote.FOR:
-                                    acc[Legislation.Vote.FOR]++;
-                                    break;
-                                case Legislation.Vote.AGAINST:
-                                    acc[Legislation.Vote.AGAINST]++;
-                                    break;
-                                case Legislation.Vote.IDLE:
-                                    acc[Legislation.Vote.IDLE]++;
-                                    break;
-                                case Legislation.Vote.MISSING:
-                                    acc[Legislation.Vote.MISSING]++;
-                                    break;
-                            }
-                            acc.total += 1
-                            return acc;
-                        },
-                        {
-                            total: 0,
-                            [Legislation.Vote.AGAINST]: 0,
-                            [Legislation.Vote.FOR]: 0,
-                            [Legislation.Vote.IDLE]: 0,
-                            [Legislation.Vote.MISSING]: 0,
-                        }
-                    );
-
+                const votingInfo = calculateLegislationParticipationData(legislation)
                 const legislationScore = calculateLegislationScore(
-                    141,
-                    71,
-                    votingInfo[Legislation.Vote.FOR],
-                    votingInfo[Legislation.Vote.AGAINST],
-                    votingInfo[Legislation.Vote.IDLE]
-                );
+                    { _iMaxMembers: 141, iDecisionTreshold: 71, iFor: votingInfo[Legislation.Vote.FOR], iAgainst: votingInfo[Legislation.Vote.AGAINST], iAbstained: votingInfo[Legislation.Vote.IDLE] });
 
                 const idleScore = calculateDecisionScore(
                     Legislation.Vote.IDLE,
@@ -160,7 +146,7 @@ export namespace Score {
             })
         ).filter(P.isDefined);
     }
-
+    ////////////////////////////////////////////////////////////////////
     export function calculateNormalizedPoliticianScore(
         iRawScores: ReadonlyArray<RankedLegislationsPolitciansIds>
     ): {
@@ -202,4 +188,5 @@ export namespace Score {
             userScore
         }
     }
+    ////////////////////////////////////////////////////////////////////
 }
