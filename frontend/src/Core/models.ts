@@ -48,8 +48,14 @@ export namespace Legislation {
         export const IDLE = '/';
         export const MISSING = '.';
 
-        export function getVoteConfig(vote: Vote) {
+        export function getVoteConfig(vote: Vote | undefined) {
             switch (vote) {
+                case undefined:
+                    return {
+                        background: '#e0e0e0',
+                        color: 'black',
+                        translation: 'Ne seime',
+                    };
                 case Vote.AGAINST:
                     return {
                         background: '#e53935',
@@ -138,6 +144,7 @@ export interface Politician {
 export namespace Politician {
     export interface WithInfo extends Politician {
         score: number;
+        votes?: Legislation.Vote[]
     }
 }
 

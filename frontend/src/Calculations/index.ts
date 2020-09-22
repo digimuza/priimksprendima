@@ -54,6 +54,7 @@ export namespace Score {
         | {
             politicianScore: number;
             politicianId: string;
+            politicianVote?: Legislation.Vote
         }[]
         | null;
     }
@@ -138,15 +139,10 @@ export namespace Score {
                                 politicianVote.vote,
                                 userVotes[legislation.legislationId]
                             )
-                            if (polScore == null) {
-                                debugger
-                            }
-                            if (legislationScore == null) {
-                                debugger
-                            }
                             return {
                                 politicianId: q.id,
-                                politicianScore: polScore * legislationScore
+                                politicianScore: polScore * legislationScore,
+                                politicianVote: politicianVote.vote as Legislation.Vote
                             }
                         });
 
@@ -177,10 +173,6 @@ export namespace Score {
 
         const userAverage = withoutSkipScores.reduce((acc, current) => acc + current.userScore, 0) / withoutSkipScores.length
         const userScore = userAverage * Math.pow(withoutSkipScores.length, 0.5)
-        console.log('USER_SCORE', {
-            scores: withoutSkipScores.map((q) => q.userScore).reduce((acc, c) => acc + c, 0) / withoutSkipScores.length,
-            userScore
-        })
         const scores = P.pipe(
             withoutSkipScores,
             P.flatMap((q) => q.politiciansWithScores),

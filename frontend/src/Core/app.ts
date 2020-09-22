@@ -90,7 +90,7 @@ export namespace Core {
               legislationScore: rawScores[q.legislationId].legislationScore
             }
           }),
-          userVotes
+          userVotes,
         }
       }),
       RXO.shareReplay(1)
@@ -103,10 +103,12 @@ export namespace Core {
         politicians, legislationList, userVotes
       }) => {
         const rawScores = Score.calculateRawScores(politicians, legislationList, userVotes)
+        const votes = P.pipe(rawScores.flatMap((q) => (q.politiciansWithScores || [])), P.groupBy((q)=> q.politicianId))
         const normalized = Score.calculateNormalizedPoliticianScore(rawScores)
         return {
           politicianScores: politicians.map((iSinglePolitician): Politician.WithInfo => {
             return {
+              votes: votes[iSinglePolitician.id].map((q) => q.politicianVote).filter(P.isDefined),
               ...iSinglePolitician,
               score: normalized.p[iSinglePolitician.id] || 0,
             }
@@ -141,7 +143,7 @@ export namespace Core {
               P.filter((q) => !!q.activityData),
               (s) => {
                 if (s.length === 0) {
-                  return 0  
+                  return 0
                 }
                 return P.pipe(
                   s,
@@ -157,18 +159,18 @@ export namespace Core {
               politicalPartyNumber: f.politicalPartyNumber,
               size: iPolitician.length,
               politicians: iPolitician,
-              score: calculatePartyScore  ,
+              score: calculatePartyScore,
             };
           })
           .filter(P.isDefined)
-
+        const max = Math.max(...parties.map((q) => q.score))
         const withNormalizedScore = parties.map(w => {
           return {
             ...w,
-            score: Math.tanh(w.score),
+            score: w.score / max,
           };
         });
-        
+
         return {
           parties: withNormalizedScore,
           politicians

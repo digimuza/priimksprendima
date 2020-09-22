@@ -3,7 +3,7 @@ import { List, Row, Col } from 'antd';
 import * as P from 'ts-prime';
 import { Legislation, User, Politician } from '../../Core';
 
-function PoliticianVote(props: { vote: Legislation.Vote }) {
+function PoliticianVote(props: { vote: Legislation.Vote | undefined }) {
   const { vote } = props;
   const { background, color, translation } = Legislation.Vote.getVoteConfig(
     vote
@@ -56,7 +56,7 @@ function UserVote(props: { vote: User.Vote }) {
 function SingleLegislationCompare(props: {
   legislation: Legislation;
   userVote: User.Vote;
-  politicianVote: Legislation.Vote;
+  politicianVote: Legislation.Vote | undefined;
 }) {
   const { legislation } = props;
   return (
@@ -191,6 +191,7 @@ export function LegislationVoteCompare(props: {
           P.sortBy(legislation => {
             return -1 * legislation.legislationScore;
           }),
+          P.filter((q) => !!q.votes[props.politician.activityData?.politicianId || '']?.vote),
           P.map(legislation => {
             return (
               <SingleLegislationCompare
@@ -199,8 +200,7 @@ export function LegislationVoteCompare(props: {
                   votes: Object.values(legislation.votes),
                 }}
                 politicianVote={
-                  legislation.votes[props.politician.activityData?.politicianId || '']?.vote ||
-                  Legislation.Vote.MISSING
+                  legislation.votes[props.politician.activityData?.politicianId || '']?.vote || undefined
                 }
                 userVote={props.userVotes[legislation.legislationId] || User.Vote.SKIP}
               ></SingleLegislationCompare>

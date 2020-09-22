@@ -10,7 +10,6 @@ export declare namespace MinMaxBar {
   }
 }
 export const MinMaxBar = (props: MinMaxBar.Props) => {
-  console.log(props.value * 100);
   const getBackground = () => {
       if (props.value === 0) {
         return "#333"

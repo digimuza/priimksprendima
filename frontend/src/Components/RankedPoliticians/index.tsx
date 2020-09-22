@@ -1,8 +1,8 @@
 import React, { useState, Fragment, useMemo } from "react";
-import { List, Progress, Input, Row, Col, Select, Checkbox } from "antd";
+import { List, Progress, Input, Row, Col, Select, Checkbox, Tag } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import * as P from "ts-prime";
-import { Politician, Core } from "../../Core";
+import { Politician, Core, Legislation } from "../../Core";
 import { partyInfo } from "../../Core/data";
 import { Colors } from "../../Core/helpers";
 import { AutoComplete } from "antd";
@@ -16,6 +16,9 @@ function SinglePolitician(props: {
   onClick: (politician: Politician.WithInfo) => void;
 }) {
   const info = useObservable(Core.Store.store.colorData);
+  const stats =
+    (props.politician.votes || []).filter((q) => q === Legislation.Vote.MISSING)
+      .length / (props.politician.votes || []).length;
   return (
     <List.Item key={props.politician.id}>
       <Row style={{ width: "100%" }}>
@@ -66,16 +69,25 @@ function SinglePolitician(props: {
                   )}
                 </div>
                 <div style={{ flexGrow: 1, paddingLeft: 15 }}>
-                  {props.politician.activityData ? (
-                    <a
-                      href={`https://www.lrs.lt/sip/portal.show?p_r=35299&p_k=1&p_a=498&p_asm_id=${props.politician.activityData?.politicianId}`}
-                      target={"_blank"}
-                    >
-                      <strong>{props.politician.displayName} </strong>
-                    </a>
-                  ) : (
-                    <strong>{props.politician.displayName} </strong>
-                  )}
+                  <Row gutter={[15, 0]}>
+                    <Col>
+                      {props.politician.activityData ? (
+                        <a
+                          href={`https://www.lrs.lt/sip/portal.show?p_r=35299&p_k=1&p_a=498&p_asm_id=${props.politician.activityData?.politicianId}`}
+                          target={"_blank"}
+                        >
+                          <strong>{props.politician.displayName} </strong>
+                        </a>
+                      ) : (
+                        <strong>{props.politician.displayName} </strong>
+                      )}
+                    </Col>
+                    <Col>
+                      {!isNaN((1 - stats) * 100) && (
+                        <Tag>Lankomumas {((1 - stats) * 100).toFixed(0)}%</Tag>
+                      )}
+                    </Col>
+                  </Row>
                 </div>
               </div>
               <div style={{ height: 10 }}></div>
