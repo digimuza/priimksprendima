@@ -28,6 +28,7 @@ export function Watch<T>(props: {
   const value = useObservable(
     from(props.data).pipe(
       catchError((err) => {
+        console.log(err)
         setError(err);
         return NEVER;
       })

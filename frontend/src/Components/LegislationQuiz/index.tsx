@@ -98,9 +98,9 @@ function Slide(props: { legislation: Legislation }) {
             {props.legislation.summary
               ?.split(";")
               .filter((q) => q)
-              .map((q) => (
-                <li>{q}</li>
-              ))}
+              .map((q) => {
+                return <li>{q}</li>;
+              })}
           </ul>
         </div>
       )}

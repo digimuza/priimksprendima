@@ -68,9 +68,6 @@ export function MainLayout(props: {
           background: "white",
           overflow: "auto",
           padding: 15,
-          height: `calc(100vh - ${TOOLBAR_HEIGHT}${
-            props.footer == null ? "" : ` - ${FOOTER_HEIGHT}`
-          })`,
         }}
       >
         <Row style={{ height: "100%" }}>
