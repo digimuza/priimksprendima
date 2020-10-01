@@ -1,7 +1,7 @@
-
 import { Legislation, User, Politician } from '../Core';
 import * as P from 'ts-prime';
 import * as z from 'zod'
+import { exception } from 'console';
 
 export namespace Score {
     ////////////////////////////////////////////////////////////////////
@@ -160,9 +160,11 @@ export namespace Score {
             P.groupBy((q) => q.politicianId),
             (q) => Object.values(q),
             P.map((politicians) => {
-                const avarage = politicians.reduce((acc, current) => acc + current.politicianScore, 0) / politicians.length
+                const withNonZeroVotes = politicians.filter(x => x.politicianScore !== 0)
+                const avarage = withNonZeroVotes.reduce((acc, current) => acc + current.politicianScore, 0) / Math.max(1, withNonZeroVotes.length)
+
                 return {
-                    politcianScore: avarage * Math.pow(politicians.length, 0.5),
+                    politcianScore: avarage * Math.pow(withNonZeroVotes.length, 0.5),
                     politicianId: politicians[0].politicianId
                 }
             })

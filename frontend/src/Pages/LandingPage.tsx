@@ -49,17 +49,8 @@ export const Footer = () => {
             <h5 className="pb-2">Sekite mus</h5>
 
             <div className="d-flex justify-content-center justify-content-md-start">
-              <a href="#">
+              <a href="https://www.facebook.com/priimksprendima">
                 <span className="mdi mdi-facebook" />
-              </a>
-              <a href="#">
-                <span className="mdi mdi-twitter" />
-              </a>
-              <a href="#">
-                <span className="mdi mdi-instagram" />
-              </a>
-              <a href="#">
-                <span className="mdi mdi-linkedin" />
               </a>
             </div>
           </div>
