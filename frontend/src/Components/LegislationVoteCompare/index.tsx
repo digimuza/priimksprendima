@@ -60,7 +60,7 @@ function SingleLegislationCompare(props: {
 }) {
   const { legislation } = props;
   return (
-    <List.Item>
+    <List.Item key={legislation.legislationId}>
       <Row style={{ width: '100%' }}>
         <Col xs={12} xl={18} span={18}>
           <div

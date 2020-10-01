@@ -23,6 +23,7 @@ export namespace Core {
       };
       FakeProgress: {}
       RankedPoliticians: {
+        showPoltiticianNumber?: boolean
         party: PoliticalParty
       }
     }

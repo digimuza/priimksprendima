@@ -16,9 +16,6 @@ function SinglePolitician(props: {
   onClick: (politician: Politician.WithInfo) => void;
 }) {
   const info = useObservable(Core.Store.store.colorData);
-  const stats =
-    (props.politician.votes || []).filter((q) => q === Legislation.Vote.MISSING)
-      .length / (props.politician.votes || []).length;
   return (
     <List.Item key={props.politician.id}>
       <Row style={{ width: "100%" }}>
@@ -34,6 +31,21 @@ function SinglePolitician(props: {
                 }}
               >
                 <div>
+                  {
+                    props.politician.politicianNumber && <Avatar
+                      style={{
+                        color: Colors.correctBackgroundTextColor(
+                          info?.[props.politician.politicalPartyId]?.color ||
+                          "#000"
+                        ),
+                        background:
+                          info?.[props.politician.politicalPartyId]?.color,
+                      }}
+                    >
+                      {props.politician.politicianNumber}
+                    </Avatar>
+                  }
+
                   {props.politician.activityData ? (
                     <a
                       href={`https://www.lrs.lt/sip/portal.show?p_r=35299&p_k=1&p_a=498&p_asm_id=${props.politician.activityData?.politicianId}`}
@@ -43,7 +55,7 @@ function SinglePolitician(props: {
                         style={{
                           color: Colors.correctBackgroundTextColor(
                             info?.[props.politician.politicalPartyId]?.color ||
-                              "#000"
+                            "#000"
                           ),
                           background:
                             info?.[props.politician.politicalPartyId]?.color,
@@ -54,19 +66,19 @@ function SinglePolitician(props: {
                       </Avatar>
                     </a>
                   ) : (
-                    <Avatar
-                      style={{
-                        color: Colors.correctBackgroundTextColor(
-                          info?.[props.politician.politicalPartyId]?.color ||
+                      <Avatar
+                        style={{
+                          color: Colors.correctBackgroundTextColor(
+                            info?.[props.politician.politicalPartyId]?.color ||
                             "#000"
-                        ),
-                        background:
-                          info?.[props.politician.politicalPartyId]?.color,
-                      }}
-                    >
-                      {props.politician.displayName.slice(0, 1)}
-                    </Avatar>
-                  )}
+                          ),
+                          background:
+                            info?.[props.politician.politicalPartyId]?.color,
+                        }}
+                      >
+                        {props.politician.displayName.slice(0, 1)}
+                      </Avatar>
+                    )}
                 </div>
                 <div style={{ flexGrow: 1, paddingLeft: 15 }}>
                   <Row gutter={[15, 0]}>
@@ -79,8 +91,8 @@ function SinglePolitician(props: {
                           <strong>{props.politician.displayName} </strong>
                         </a>
                       ) : (
-                        <strong>{props.politician.displayName} </strong>
-                      )}
+                          <strong>{props.politician.displayName} </strong>
+                        )}
                     </Col>
                   </Row>
                 </div>
@@ -89,32 +101,31 @@ function SinglePolitician(props: {
               {props.politician.activityData ? (
                 <MinMaxBar value={props.politician.score}></MinMaxBar>
               ) : (
-                // <Progress
-                //   key={props.politician.id}
-                //   strokeColor={{
-                //     from: "#108ee9",
-                //     to: "#87d068",
-                //   }}
-                //   showInfo={false}
-                //   percent={props.politician.score * 100}
-                // ></Progress>
-                <Fragment>
-                  <Row style={{ width: "90%" }}>
-                    <Col>
-                      <strong>Neturime duomenų</strong>
-                    </Col>
-                  </Row>
-                  <MinMaxBar value={props.politician.score}></MinMaxBar>
-                </Fragment>
-              )}
+                  // <Progress
+                  //   key={props.politician.id}
+                  //   strokeColor={{
+                  //     from: "#108ee9",
+                  //     to: "#87d068",
+                  //   }}
+                  //   showInfo={false}
+                  //   percent={props.politician.score * 100}
+                  // ></Progress>
+                  <Fragment>
+                    <Row style={{ width: "90%" }}>
+                      <Col>
+                        <strong>Neturime duomenų</strong>
+                      </Col>
+                    </Row>
+                    <MinMaxBar value={props.politician.score}></MinMaxBar>
+                  </Fragment>
+                )}
               <div style={{ height: 10 }}></div>
               <Row gutter={[5, 5]}>
                 <Col>
                   <Avatar
                     size={"small"}
                     src={imageFolder(
-                      `parties/${
-                        info?.[props.politician.politicalPartyId]?.logo
+                      `parties/${info?.[props.politician.politicalPartyId]?.logo
                       }`
                     )}
                   ></Avatar>
@@ -215,6 +226,7 @@ export function RankedPoliticianList(props: {
             </Row>
           </List.Item>
         }
+        
         pagination={{
           current: iSelectedPagination ?? 1,
           onChange: (page) => {

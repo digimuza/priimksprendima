@@ -13,12 +13,14 @@ export function PoliticianSummaryPage(
       {({ legislationList, userVotes }) => {
         return (
           <MainLayout
+            key={props.politician.displayName}
             title={props.politician.displayName}
             onBack={() => {
               Core.Navigator.popPage();
             }}
           >
             <LegislationVoteCompare
+              key={props.politician.displayName}
               politician={props.politician}
               userVotes={userVotes}
               legislationList={legislationList}
