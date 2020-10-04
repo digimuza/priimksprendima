@@ -16,7 +16,7 @@ function SingleParty(props: {
 
   return (
     <List.Item>
-<      Row style={{ width: "100%" }}>
+      <      Row style={{ width: "100%" }}>
         <Col xs={18}>
           <div style={{ flexGrow: 1, display: "flex" }}>
             <div style={{ flexGrow: 1 }}>
@@ -107,6 +107,34 @@ export function RankedParties(props: {
   parties: ReadonlyArray<PoliticalParty.WithInfo>;
   onClick: (party: PoliticalParty) => void;
 }) {
+  const votes = useObservable(Core.Store.store.userVotes)
+  const Bu = () => {
+    if (votes == null) return null
+    if (Object.values(votes).length < 10) {
+      return <button
+        onClick={() => {
+          Core.Events.resetQuiz();
+          Core.Navigator.pushPage({
+            page: "LegislationQuizPage",
+            payload: {},
+          });
+        }}
+        className={"btn btn-success btn-sm"}
+      >Pildyti pilną klausimyną</button>
+    }
+    return <button
+      onClick={() => {
+        Core.Events.resetQuiz();
+        Core.Navigator.pushPage({
+          page: "LegislationQuizPage",
+          payload: {},
+        });
+      }}
+      className={"btn btn-success btn-sm"}
+    >
+      Kartoti
+    </button>
+  }
   return (
     <List
       header={
@@ -120,18 +148,7 @@ export function RankedParties(props: {
               </Row>
             </Col>
             <Col>
-              <button
-                onClick={() => {
-                  Core.Events.resetQuiz();
-                  Core.Navigator.pushPage({
-                    page: "LegislationQuizPage",
-                    payload: {},
-                  });
-                }}
-                className={"btn btn-success btn-sm"}
-              >
-                Kartoti
-              </button>
+          <Bu></Bu>
             </Col>
           </Row>
         </List.Item>

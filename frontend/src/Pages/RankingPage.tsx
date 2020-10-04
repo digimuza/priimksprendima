@@ -85,6 +85,7 @@ export function RankedPoliticians(
       }}
     >
       <RankedPoliticianList
+        view={'party'}
         politicians={props.party.politicians}
         onClick={(q) => {
           Core.Navigator.pushPage({

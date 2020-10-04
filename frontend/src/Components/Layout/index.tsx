@@ -6,7 +6,6 @@ const { Content, Footer } = Layout;
 
 const BASE_CLASS = "CoreLayout";
 const FOOTER_HEIGHT = "120px";
-const TOOLBAR_HEIGHT = "68px";
 export function CoreLayout(props: {
   className?: string;
   children?: any;
@@ -53,7 +52,7 @@ export function MainLayout(props: {
                 <Link to={"/"}>
                   <img
                     style={{ height: 50, width: "auto" }}
-                    src="images/FavIco.svg"
+                    src="/images/FavIco.svg"
                     alt=""
                   />
                 </Link>

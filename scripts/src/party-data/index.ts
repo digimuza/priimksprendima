@@ -1,5 +1,6 @@
 import { csvRead, jsonWrite } from "iterparse"
 import { AsyncIterable } from "ix"
+import { deepMergeRight } from "ts-prime"
 import * as z from 'zod'
 
 
@@ -45,12 +46,21 @@ const schema = z.object({
     kada_isrinktas_paskutini_karta: z.string()
 })
 
-AsyncIterable
-    .from(
-        csvRead<any>("./partyData.csv")
-    ).map((q) => {
-        let remap = {} as Record<string, string>
+export function toId(data: string) {
+    return data.toLowerCase()
+        .replace("–", '')
+        .replace("-", '')
+        .replace("„", '')
+        .replace("„", '')
+        .replace("“", '')
+        .replace(/[^a-zA-Z0-9_-]/gm, "")
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, "").split(" ").join("_")
+}
 
+AsyncIterable
+    .from(csvRead<any>("./partyData.csv"))
+    .map((q) => {
+        let remap = {} as Record<string, string>
         for (const [original, newField] of Object.entries(mappings)) {
             remap[newField] = q[original]
         }
@@ -59,7 +69,25 @@ AsyncIterable
     .map((q) => {
         return schema.parse(q)
     })
-    .pipe(
-        jsonWrite("./parsedPartyCsv.json")
-    )
+    .groupBy((q)=>{
+        return toId(`${q.firstName} ${q.lastName}`)
+    })
+    .map(async (q)=>{
+        const items = await q.toArray()
+        const dar = items.map((q)=>{
+            let s = {} as typeof q
+            for (const [key,val] of Object.entries(q)) {
+                if (val) {
+                    (s as any)[key] = val
+                }
+            }
+            return  s
+        })
+        
+        return deepMergeRight(dar[0], ...dar)
+    })
+    .map((w)=>{
+        return w
+    })
+    .pipe(jsonWrite("./parsedPartyCsv.json"))
     .count()

@@ -13,8 +13,10 @@ import { MinMaxBar } from "../Common/ProgressBar";
 
 function SinglePolitician(props: {
   politician: Politician.WithInfo;
+  view?: "regular" | 'party'
   onClick: (politician: Politician.WithInfo) => void;
 }) {
+  const { view = 'regular' } = props
   const info = useObservable(Core.Store.store.colorData);
   return (
     <List.Item key={props.politician.id}>
@@ -31,21 +33,6 @@ function SinglePolitician(props: {
                 }}
               >
                 <div>
-                  {
-                    props.politician.politicianNumber && <Avatar
-                      style={{
-                        color: Colors.correctBackgroundTextColor(
-                          info?.[props.politician.politicalPartyId]?.color ||
-                          "#000"
-                        ),
-                        background:
-                          info?.[props.politician.politicalPartyId]?.color,
-                      }}
-                    >
-                      {props.politician.politicianNumber}
-                    </Avatar>
-                  }
-
                   {props.politician.activityData ? (
                     <a
                       href={`https://www.lrs.lt/sip/portal.show?p_r=35299&p_k=1&p_a=498&p_asm_id=${props.politician.activityData?.politicianId}`}
@@ -98,6 +85,20 @@ function SinglePolitician(props: {
                 </div>
               </div>
               <div style={{ height: 10 }}></div>
+              <Row gutter={[5, 5]} align={'middle'}>
+                <Col>
+                  <Avatar
+                    size={"small"}
+                    src={imageFolder(
+                      `parties/${info?.[props.politician.politicalPartyId]?.logo
+                      }`
+                    )}
+                  ></Avatar>
+                </Col>
+                {view === 'party' && <Col><strong>Nr. {props.politician.politicianNumber}</strong> {props.politician.region ? `ir ${props.politician.region} apygarda` : ''}</Col>}
+                {view === 'regular' && <Col>{props.politician.politicalPartyName}</Col>}
+              </Row>
+              <div style={{ height: 10 }}></div>
               {props.politician.activityData ? (
                 <MinMaxBar value={props.politician.score}></MinMaxBar>
               ) : (
@@ -120,18 +121,7 @@ function SinglePolitician(props: {
                   </Fragment>
                 )}
               <div style={{ height: 10 }}></div>
-              <Row gutter={[5, 5]}>
-                <Col>
-                  <Avatar
-                    size={"small"}
-                    src={imageFolder(
-                      `parties/${info?.[props.politician.politicalPartyId]?.logo
-                      }`
-                    )}
-                  ></Avatar>
-                </Col>
-                <Col>{props.politician.politicalPartyName}</Col>
-              </Row>
+            
             </div>
             <div
               style={{
@@ -179,6 +169,7 @@ function SinglePolitician(props: {
 export const selectedPagination = new BehaviorSubject<number | null>(null);
 export const onlyWithData = new BehaviorSubject<boolean>(false);
 export function RankedPoliticianList(props: {
+  view?: "regular" | "party"
   politicians: Politician.WithInfo[];
   onClick: (politic: Politician.WithInfo) => void;
 }) {
@@ -226,7 +217,7 @@ export function RankedPoliticianList(props: {
             </Row>
           </List.Item>
         }
-        
+
         pagination={{
           current: iSelectedPagination ?? 1,
           onChange: (page) => {
@@ -236,7 +227,7 @@ export function RankedPoliticianList(props: {
           pageSize: 10,
         }}
         dataSource={P.sortBy(
-          props.politicians.filter((q) => {
+          props.politicians.filter((q) => q.politicalPartyNumber !== "").filter((q) => {
             if (onlyWithDataS) {
               return !!q.activityData;
             }
@@ -248,6 +239,7 @@ export function RankedPoliticianList(props: {
         renderItem={(politician: Politician.WithInfo) => {
           return (
             <SinglePolitician
+              view={props.view}
               key={politician.id}
               onClick={props.onClick}
               politician={politician}

@@ -5,9 +5,6 @@ import {
   Progress,
   Row,
   Col,
-  List,
-  Button,
-  Space,
 } from "antd";
 import { YouTubeView } from "../Common/Youtube";
 import { BehaviorSubject } from "rxjs";
@@ -146,6 +143,56 @@ export interface LegislationQuiz {
   legislationList: ReadonlyArray<Legislation>;
   onDone: (result: Record<string, User.Vote>) => void;
 }
+
+export function LegislationSlide(props: {
+  disableSkipButton?: boolean
+  legislation: Legislation,
+  onDone: (result: Record<string, User.Vote>) => void;
+}) {
+  const { legislation, onDone } = props
+  const ref = useRef<Record<string, User.Vote>>({});
+  const userClickHandler = (vote: User.Vote) => {
+    ref.current[legislation.legislationId] = vote;
+    onDone(ref.current)
+  };
+  return <MainLayout
+    className={"LegislationQuiz"}
+    key={"4"}
+    title={"Balsuok"}
+    footer={
+      <Fragment>
+        <Row>
+          <Col span={8}>
+            <VoteButton
+              onClick={userClickHandler}
+              vote={User.Vote.FOR}
+            ></VoteButton>
+          </Col>
+          {
+            !props.disableSkipButton ? <Col span={8}>
+              <VoteButton
+                onClick={userClickHandler}
+                vote={User.Vote.SKIP}
+              ></VoteButton>
+            </Col> : <Col span={8}>
+              </Col>
+          }
+
+          <Col span={8}>
+            <VoteButton
+              onClick={userClickHandler}
+              vote={User.Vote.AGAINST}
+            ></VoteButton>
+          </Col>
+        </Row>
+      </Fragment>
+    }
+  >
+    <Slide legislation={props.legislation}></Slide>
+  </MainLayout>
+}
+
+
 export function LegislationQuiz(props: LegislationQuiz) {
   const ref = useRef<Record<string, User.Vote>>({});
   const { legislationList, onDone } = props;

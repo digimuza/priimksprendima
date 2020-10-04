@@ -85,12 +85,13 @@ export namespace Core {
       RXO.map(({ legislationList, politicians, userVotes }) => {
         const rawScores = P.indexBy(Score.calculateRawScores({ politicians, data: legislationList, userVotes }), (q) => q.legislationId)
         return {
-          legislationList: legislationList.map((q): Legislation.WithScore => {
+          legislationList: legislationList.map((q) => {
+            if (rawScores[q.legislationId] == null) return
             return {
               ...q,
               legislationScore: rawScores[q.legislationId].legislationScore
             }
-          }),
+          }).filter(P.isDefined),
           userVotes,
         }
       }),
@@ -129,7 +130,7 @@ export namespace Core {
         const parties = Object.entries(
           P.pipe(
             politicians.politicianScores,
-            // P.filter(q => q.activityData != null),
+            P.filter(q => q.politicalPartyNumber != null),
             P.groupBy(q => q.politicalPartyNumber)
           )
         )
@@ -156,7 +157,7 @@ export namespace Core {
             }
 
             const calculateStatisticalScore = () => {
-              return getPoliticianScore(activePoliticians) * Math.pow(activePoliticians.length, 0.5)
+              return getPoliticianScore(activePoliticians)
             }
 
             return {

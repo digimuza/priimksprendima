@@ -22,6 +22,7 @@
     "iterparse": "0.0.7",
     "ix": "^2.5.5",
     "node-fetch": "^2.6.0",
+    "tree-model": "^1.0.7",
     "ts-prime": "^0.0.28",
     "ts-toolbelt": "^6.9.4",
     "zod": "^1.7.0"

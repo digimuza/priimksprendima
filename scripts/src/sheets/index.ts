@@ -86,6 +86,7 @@ export namespace LegislationSheeet {
         export const schema = Z.object({
             order: Z.string(),
             fullOrder: Z.string(),
+            IsInList: Z.string(),
             linkToOrder: Z.string(),
             summary: Z.string().optional(),
             argumentFor: Z.string().optional(),
@@ -144,7 +145,6 @@ export namespace LegislationSheeet {
             .slice(1)
             .map((r) => toObject(headers, r))
             .map((q) => {
-                console.log(q)
                 return P.canFail(() => PartialLegislation.schema.parse(JSON.parse(JSON.stringify(q))))
             })
             .filter(P.isNot(P.isError))
@@ -153,6 +153,7 @@ export namespace LegislationSheeet {
                 if (legislationId == null) return
                 return {
                     ...q,
+                    isInList: q.IsInList === "1" ? true : false,
                     legislationId: legislationId
                 }
             })

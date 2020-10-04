@@ -32,6 +32,7 @@ export namespace Score {
     function calculateDecisionScore(iPoliticianVote: Legislation.Vote, iUserVote: User.Vote): number {
         const weightsFor = [10, -10, -4, -5];
         const weightsAgainst = [-10, 10, -4, -3];
+
         return z.number().parse(iUserVote === User.Vote.FOR
             ? weightsFor[voteToInt(iPoliticianVote)]
             : weightsAgainst[voteToInt(iPoliticianVote)])
@@ -94,6 +95,7 @@ export namespace Score {
             data,
             P.map((legislation) => {
                 const userVote = userVotes[legislation.legislationId]
+                if (userVote == null) return
                 const userVote2 = toPoliticianVote(userVotes[legislation.legislationId])
                 const votingInfo = calculateLegislationParticipationData(legislation)
                 const legislationScore = calculateLegislationScore(
