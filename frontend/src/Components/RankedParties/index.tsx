@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Progress, Button, Col, Row, Badge } from "antd";
+import { List, Progress, Button, Col, Row, Badge, Collapse } from "antd";
 import * as P from "ts-prime";
 import { Politician, PoliticalParty, Core } from "../../Core";
 import Avatar from "antd/lib/avatar/avatar";
@@ -7,7 +7,20 @@ import { useObservable } from "../../Helpers/rxjs";
 import { imageFolder } from "../../Helpers";
 import { selectedPagination } from "../RankedPoliticians";
 import { MinMaxBar } from "../Common/ProgressBar";
+import { ProgramPlan } from "./parties-programs";
+const txt = `Mums svarbi pagarba žmogui ir jo orumui.
+Gerbiame asmens laisvę ir atsakomybės pareigą.
+Tikime gėriu, teisingumu ir Tauta.
+Remiamės krikščioniškosios Vakarų civilizacijos principais.
 
+Mūsų tikslai:
+• stiprinti demokratiją ir visur siekti teisingumo;
+• valdžia privalo tarnauti žmonėms;
+• referendumams organizuoti reiktų 100 tūkstančių piliečių parašų;
+• Seimo narių skaičių sumažinti iki 101;
+• panaikinti partijų finansavimą iš valstybės biudžeto;
+• pertvarkyti teisėjų ir prokurorų atrankos ir vertinimo  sistemą;
+• baigti vykdyti liustraciją. (Liustracija yra patikrinimas, ar asmuo bendradarbiavo su KGB. KGB – buvusios Sovietų Sąjungos slaptoji tarnyba.)`;
 function SingleParty(props: {
   party: PoliticalParty.WithInfo;
   onClick: (party: PoliticalParty.WithInfo) => void;
@@ -16,7 +29,7 @@ function SingleParty(props: {
 
   return (
     <List.Item>
-      <      Row style={{ width: "100%" }}>
+      <Row style={{ width: "100%" }}>
         <Col xs={18}>
           <div style={{ flexGrow: 1, display: "flex" }}>
             <div style={{ flexGrow: 1 }}>
@@ -45,6 +58,7 @@ function SingleParty(props: {
                   </Row>
                 </div>
               </div>
+              <ProgramPlan partyId={props.party.partyId}></ProgramPlan>
               <div style={{ width: "90%" }}>
                 <MinMaxBar value={props.party.score}></MinMaxBar>
               </div>
@@ -107,11 +121,27 @@ export function RankedParties(props: {
   parties: ReadonlyArray<PoliticalParty.WithInfo>;
   onClick: (party: PoliticalParty) => void;
 }) {
-  const votes = useObservable(Core.Store.store.userVotes)
+  const votes = useObservable(Core.Store.store.userVotes);
   const Bu = () => {
-    if (votes == null) return null
+    if (votes == null) return null;
     if (Object.values(votes).length < 10) {
-      return <button
+      return (
+        <button
+          onClick={() => {
+            Core.Events.resetQuiz();
+            Core.Navigator.pushPage({
+              page: "LegislationQuizPage",
+              payload: {},
+            });
+          }}
+          className={"btn btn-success btn-sm"}
+        >
+          Pildyti pilną klausimyną
+        </button>
+      );
+    }
+    return (
+      <button
         onClick={() => {
           Core.Events.resetQuiz();
           Core.Navigator.pushPage({
@@ -120,21 +150,11 @@ export function RankedParties(props: {
           });
         }}
         className={"btn btn-success btn-sm"}
-      >Pildyti pilną klausimyną</button>
-    }
-    return <button
-      onClick={() => {
-        Core.Events.resetQuiz();
-        Core.Navigator.pushPage({
-          page: "LegislationQuizPage",
-          payload: {},
-        });
-      }}
-      className={"btn btn-success btn-sm"}
-    >
-      Kartoti
-    </button>
-  }
+      >
+        Kartoti
+      </button>
+    );
+  };
   return (
     <List
       header={
@@ -148,7 +168,7 @@ export function RankedParties(props: {
               </Row>
             </Col>
             <Col>
-          <Bu></Bu>
+              <Bu></Bu>
             </Col>
           </Row>
         </List.Item>

@@ -9,6 +9,7 @@ import {
 } from "../Components/RankedPoliticians";
 import { BehaviorSubject } from "rxjs";
 import { useObservable } from "../Helpers/rxjs";
+import { ProgramPlan } from "../Components/RankedParties/parties-programs";
 
 const selectedTab = new BehaviorSubject("1");
 export function RankingPage() {
@@ -84,6 +85,7 @@ export function RankedPoliticians(
         Core.Navigator.popPage();
       }}
     >
+      {/* <ProgramPlan partyId={props.party.partyId}></ProgramPlan> */}
       <RankedPoliticianList
         view={'party'}
         politicians={props.party.politicians}

@@ -197,7 +197,7 @@ export function LegislationQuiz(props: LegislationQuiz) {
   const ref = useRef<Record<string, User.Vote>>({});
   const { legislationList, onDone } = props;
   const [state, setSlide] = useState(0);
-  const data = legislationList.map((q, index) => ({ legislation: q, index }));
+  const data = legislationList.filter((q) => q.isInList).map((q, index) => ({ legislation: q, index }));
   useEffect(() => {
     if (data.length === state) {
       onDone(ref.current);

@@ -6,6 +6,7 @@ export interface Legislation {
     youtubeUrl: string;
     fullOrder: string;
     summary?: string,
+    isInList: boolean
     argumentFor?: string,
     argumentAgainst?: string,
     linkToOrder: string;
@@ -34,6 +35,7 @@ export namespace Legislation {
         summary: z.string().optional(),
         argumentFor: z.string().optional(),
         argumentAgainst: z.string().optional(),
+        isInList: z.boolean(),
         youtubeUrl: z.string(),
         fullOrder: z.string(),
         linkToOrder: z.string(),

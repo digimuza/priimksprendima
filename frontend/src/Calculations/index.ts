@@ -30,8 +30,8 @@ export namespace Score {
     }
     ////////////////////////////////////////////////////////////////////
     function calculateDecisionScore(iPoliticianVote: Legislation.Vote, iUserVote: User.Vote): number {
-        const weightsFor = [10, -10, -4, -5];
-        const weightsAgainst = [-10, 10, -4, -3];
+        const weightsFor = [2, -2, 0, -0.1];
+        const weightsAgainst = [-2, 2, -1, 2];
 
         return z.number().parse(iUserVote === User.Vote.FOR
             ? weightsFor[voteToInt(iPoliticianVote)]
